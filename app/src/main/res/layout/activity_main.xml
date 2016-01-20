@@ -9,7 +9,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Incsription"
+        android:text="Inscription"
         android:id="@+id/bouton1"
         android:layout_above="@+id/boutonStatus"
         android:layout_centerHorizontal="true"

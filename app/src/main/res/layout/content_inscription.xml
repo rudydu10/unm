@@ -11,7 +11,7 @@
     tools:context="com.unm.rodolphe.unnouveaumonde.Inscription">
 
 
-    <Spinner
+   /* <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerEnfant"
@@ -25,7 +25,17 @@
         android:id="@+id/spinnerActivite"
         android:layout_below="@+id/spinnerEnfant"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />*/
+
+    <ListView android:id="@+id/ListView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <ListView android:id="@+id/ListView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ListView>
 
     <Button
         android:layout_width="wrap_content"

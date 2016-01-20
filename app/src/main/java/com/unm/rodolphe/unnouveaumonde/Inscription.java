@@ -1,20 +1,16 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 import android.app.Activity;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +23,10 @@ public class Inscription extends Activity {
 
     Spinner spinnerEnfant;
     Spinner spinnerActivite;
+    ListView listE;
+    ListView listA;
+    String idActivite;
+    String idEnfant;
     TextView texteDescription;
     Button buttonSubmit;
     Button boutonRetour;
@@ -41,6 +41,8 @@ public class Inscription extends Activity {
 
         spinnerEnfant = (Spinner) findViewById(R.id.spinnerEnfant);
         spinnerActivite = (Spinner) findViewById(R.id.spinnerActivite);
+        spinnerEnfant.setVisibility(View.GONE);
+        spinnerActivite.setVisibility(View.GONE);
         List listEnfant = new ArrayList();
         List listActivite = new ArrayList();
         Enumeration e1 = ht1.elements();
@@ -66,7 +68,16 @@ public class Inscription extends Activity {
         adapterActivite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerActivite.setAdapter(adapterActivite);
 
-        addListenerOnSpinner();
+        listE = (ListView)findViewById(R.id.ListView01);
+        listA = (ListView)findViewById(R.id.ListView02);
+        listA.setVisibility(View.GONE);
+
+
+        listE.setAdapter(adapterEnfant);
+        listA.setAdapter(adapterActivite);
+
+        addListenerOnEnfant();
+        addListenerOnActivite();
         addListenerOnButton();
         addListenerOnButton2();
     }
@@ -93,8 +104,8 @@ public class Inscription extends Activity {
                 if (String.valueOf(spinnerEnfant.getSelectedItem()).length() > 1) {
 
                     try {
-                        String idActivite = Methods.getActiviteId(String.valueOf(spinnerActivite.getSelectedItem()));
-                        String idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(spinnerEnfant.getSelectedItem())));
+                        idActivite = Methods.getActiviteId(String.valueOf(spinnerActivite.getSelectedItem()));
+                        idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(spinnerEnfant.getSelectedItem())));
                         String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
                         if (response.contains(Constants.CODE_OK)) {
                             Toast.makeText(Inscription.this, "Inscription correctement enregistrée.", Toast.LENGTH_LONG).show();
@@ -134,23 +145,49 @@ public class Inscription extends Activity {
         }
     }
 
-    private void addListenerOnSpinner()
+    private void addListenerOnEnfant()
     {
         texteDescription = (TextView) findViewById(R.id.texteDescription);
-        spinnerActivite.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listE.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(listE.getItemAtPosition(position))));
+                    System.out.print(idEnfant);
+                    listE.setVisibility(View.GONE);
+                    Toast.makeText(Inscription.this, idEnfant, Toast.LENGTH_LONG).show();
+                    listA.setVisibility(View.VISIBLE);
+                //try {
+                    //texteDescription.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(spinnerActivite.getSelectedItem())));
+                /*} catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+            }
+
+
+        });
+
+
+    }
+
+    private void addListenerOnActivite()
+    {
+        texteDescription = (TextView) findViewById(R.id.texteDescription);
+        listA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                idActivite = Methods.getActiviteId(String.valueOf((listA.getItemAtPosition(position))));
+                System.out.print(idActivite);
+                Toast.makeText(Inscription.this, idActivite, Toast.LENGTH_LONG).show();
                 try {
-                    texteDescription.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(spinnerActivite.getSelectedItem())));
+                texteDescription.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(listA.getItemAtPosition(position))));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
         });
 
 
