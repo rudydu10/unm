@@ -29,11 +29,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StatusInscription"
-            android:label="@string/title_activity_statusinscription"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
             android:name=".StatusInscriptions"
             android:label="@string/title_activity_status_inscriptions"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -41,6 +36,11 @@
         <activity
             android:name=".Inscription"
             android:label="@string/title_activity_inscription"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".web"
+            android:label="@string/title_activity_web"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
