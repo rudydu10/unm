@@ -41,20 +41,9 @@
         android:layout_height="wrap_content"
         android:text="@string/envoyer"
         android:id="@+id/buttonSubmitLogin"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="62dp"
         android:layout_below="@+id/Password"
-        android:layout_toLeftOf="@+id/checkBox1"
-        android:layout_toStartOf="@+id/checkBox1" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Se souvenir de moi"
-        android:id="@+id/checkBox1"
-        android:layout_alignBaseline="@+id/buttonSubmitLogin"
-        android:layout_alignBottom="@+id/buttonSubmitLogin"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"

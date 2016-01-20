@@ -3,6 +3,7 @@ package com.unm.rodolphe.unnouveaumonde;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -179,6 +180,20 @@ public class Methods {
 
     }
 
+    public static String getParentId(String username)
+    {
+        try
+        {
+            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "id", "username", username);
+            return response;
+
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getActiviteId(String activite) {
         try
         {
@@ -193,6 +208,37 @@ public class Methods {
         }
 
 
+    }
+
+    @NonNull
+    public static String login(String username, String password)
+    {
+        try {
+            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.login_PHP), "login", "password", "username", username + ":" + password);
+            if(response.contains(encodeMD5(password)))
+            {
+                return Constants.CODE_OK;
+            }
+            else if(response.contains(Constants.CODE_ERROR_DROIT_CONNECTION))
+            {
+                return Constants.CODE_ERROR_DROIT_CONNECTION;
+            }
+            else if(response.contains(Constants.CODE_MISSING))
+            {
+                return Constants.CODE_MISSING;
+            }
+            else if(response.contains(Constants.CODE_ERROR_LOGIN))
+            {
+                return Constants.CODE_ERROR_LOGIN;
+            }
+            else
+            {
+                return Constants.CODE_ERROR;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Constants.CODE_ERROR;
+        }
     }
 
     public static String JSONtoStringID(String string) {

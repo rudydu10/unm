@@ -17,7 +17,7 @@ public class Constants {
     public static final String CODE_ERROR_DUAL_ENTRY = "202";
     public static final String CODE_ERROR_DROIT_CONNECTION = "204";
 
-    public static String idParent = null;
+    public static String idParent;
 
     //SERVER ADDRESS
 

@@ -1,13 +1,14 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 public class Main extends AppCompatActivity {
 
@@ -18,6 +19,19 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if(Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK))
+        {
+        }
+        else
+        {
+            Intent loginActivite = new Intent(Main.this, LoginActivity.class);
+            startActivity(loginActivite);
+            finish();
+        }
+
         setContentView(R.layout.activity_main);
 
         bouton1 = (Button) findViewById(R.id.bouton1);
@@ -49,21 +63,29 @@ public class Main extends AppCompatActivity {
                 startActivity(SiteWeb);
             }
         });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId())
+        {
+            case R.id.deconnection:
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                final SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                Intent loginActivity = new Intent(Main.this, LoginActivity.class);
+                startActivity(loginActivity);
+                finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
