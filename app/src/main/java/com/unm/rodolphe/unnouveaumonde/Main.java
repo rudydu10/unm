@@ -13,6 +13,7 @@ public class Main extends AppCompatActivity {
 
     public Button bouton1;
     public Button boutonStatus;
+    public Button boutonSiteweb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class Main extends AppCompatActivity {
 
         bouton1 = (Button) findViewById(R.id.bouton1);
         boutonStatus = (Button) findViewById(R.id.boutonStatus);
+        boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
 
         bouton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +39,14 @@ public class Main extends AppCompatActivity {
                 Intent StatusActivite = new Intent(Main.this, StatusInscriptions.class);
                 startActivity(StatusActivite);
                 finish();
+            }
+        });
+
+        boutonSiteweb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent SiteWeb = new Intent(Main.this, web.class);
+                startActivity(SiteWeb);
             }
         });
     }
