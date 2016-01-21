@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Main extends AppCompatActivity {
 
@@ -27,6 +28,11 @@ public class Main extends AppCompatActivity {
         if(Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK))
         {
             Constants.idParent = preferences.getString("ID","");
+            if(Constants.premiereConnection)
+            {
+                Toast.makeText(Main.this, "Bonjour" + Methods.getParentFirstName(Constants.idParent), Toast.LENGTH_LONG).show();
+                Constants.premiereConnection = false;
+            }
         }
         else
         {
@@ -96,6 +102,7 @@ public class Main extends AppCompatActivity {
                 editor.commit();
                 Intent loginActivity = new Intent(Main.this, LoginActivity.class);
                 startActivity(loginActivity);
+                Constants.premiereConnection = true;
                 finish();
                 return true;
         }
