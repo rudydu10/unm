@@ -127,7 +127,7 @@ public class Main extends AppCompatActivity {
         Notification noti = new Notification.Builder(this)
                 .setContentTitle("Un Nouveau Monde")
                 .setContentText("Le nouveau programme est sortit !").setSmallIcon(R.drawable.notification)
-                .setContentIntent(pIntent).build();
+                .setContentIntent(pIntent).setVibrate(new long[] {0,200,100,200,100,200}).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // hide the notification after its selected
         noti.flags |= Notification.FLAG_AUTO_CANCEL;
