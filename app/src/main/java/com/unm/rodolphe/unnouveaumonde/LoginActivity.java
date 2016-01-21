@@ -67,8 +67,8 @@ public class LoginActivity extends Activity {
                 if (login.contains(Constants.CODE_OK)) {
                     editor.putString("USERNAME", Username.getText().toString());
                     editor.putString("PASSWORD", Password.getText().toString());
+                    editor.putString("ID", Methods.getParentId(Username.getText().toString()).replaceAll("\t", "").toString());
                     editor.commit();
-                    Constants.idParent = Methods.getParentId(Username.getText().toString()).replaceAll("\t", "");
                     Intent MainActivite = new Intent(LoginActivity.this, Main.class);
                     startActivity(MainActivite);
                     finish();
