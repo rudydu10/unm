@@ -23,6 +23,6 @@ public class Constants {
 
     public static final String server_ADDRESS = "http://192.168.1.101/android/";
     public static final String webserver_ADDRESS = "http://192.168.1.66/";
-    public static final String programme_ADDRESS = "http://192.168.1.101/android/programme/programme.html";
+    public static final String programme_ADDRESS = "http://192.168.1.66/spip.php?article54";
 
 }

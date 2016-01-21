@@ -21,6 +21,7 @@ public class web extends Activity {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
 
         webView.loadUrl(Constants.webserver_ADDRESS);
         webView.setWebViewClient(new WebViewClient()
