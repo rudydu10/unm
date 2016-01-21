@@ -93,7 +93,7 @@ public class Main extends AppCompatActivity {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                 final SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
-                editor.commit();
+                editor.apply();
                 Intent loginActivity = new Intent(Main.this, LoginActivity.class);
                 startActivity(loginActivity);
                 finish();
