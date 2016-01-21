@@ -14,6 +14,9 @@
     <string name="title_activity_status_inscription">Inscriptions</string>
     <string name="title_activity_status_inscriptions">Status des Inscriptions</string>
     <string name="MenuPrincipal">Menu Principal</string>
+    <string name="notification">Notification Un Nouveau Monde</string>
+    <string name="notification_title">Test de notification</string>
+    <string name="notification_desc">Cliquez sur moi pour voir le nouveau Programme</string>
 
     <!-- Strings related to Settings -->
 

@@ -1,5 +1,8 @@
 package com.unm.rodolphe.unnouveaumonde;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -17,6 +20,7 @@ public class Main extends AppCompatActivity {
     Button boutonStatus;
     Button boutonSiteweb;
     Button boutonProgramme;
+    Button boutonNotification;
 
 
     @Override
@@ -25,17 +29,13 @@ public class Main extends AppCompatActivity {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if(Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK))
-        {
-            Constants.idParent = preferences.getString("ID","");
-            if(Constants.premiereConnection)
-            {
+        if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
+            Constants.idParent = preferences.getString("ID", "");
+            if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, "Bonjour" + Methods.getParentFirstName(Constants.idParent), Toast.LENGTH_LONG).show();
                 Constants.premiereConnection = false;
             }
-        }
-        else
-        {
+        } else {
             Intent loginActivite = new Intent(Main.this, LoginActivity.class);
             startActivity(loginActivite);
             finish();
@@ -47,6 +47,7 @@ public class Main extends AppCompatActivity {
         boutonStatus = (Button) findViewById(R.id.boutonStatus);
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
+        boutonNotification = (Button) findViewById(R.id.buttonNotif);
 
         bouton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +81,12 @@ public class Main extends AppCompatActivity {
             }
         });
 
+        boutonNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createNotification();
+            }
+        });
 
 
     }
@@ -93,8 +100,7 @@ public class Main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.deconnection:
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
                 final SharedPreferences.Editor editor = preferences.edit();
@@ -108,5 +114,24 @@ public class Main extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void createNotification() {
+        // Prepare intent which is triggered if the
+        // notification is selected
+        Intent intent = new Intent(this, Programme.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+
+        // Build notification
+        // Actions are just fake
+        Notification noti = new Notification.Builder(this)
+                .setContentTitle("Un Nouveau Monde")
+                .setContentText("Le nouveau programme est sortit !").setSmallIcon(R.drawable.notification)
+                .setContentIntent(pIntent).build();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        // hide the notification after its selected
+        noti.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(0, noti);
     }
 }
