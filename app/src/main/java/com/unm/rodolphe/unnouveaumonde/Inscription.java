@@ -25,8 +25,8 @@ public class Inscription extends Activity {
     Spinner spinnerActivite;
     ListView listE;
     ListView listA;
-    String idActivite;
-    String idEnfant;
+    String idActivite = "0";
+    String idEnfant = "0";
     TextView texteDescription;
     Button buttonSubmit;
     Button boutonRetour;
@@ -64,17 +64,19 @@ public class Inscription extends Activity {
         adapterEnfant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEnfant.setAdapter(adapterEnfant);
 
+
         ArrayAdapter<String> adapterActivite = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listActivite);
         adapterActivite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerActivite.setAdapter(adapterActivite);
 
+
         listE = (ListView)findViewById(R.id.ListView01);
-        listA = (ListView)findViewById(R.id.ListView02);
-        listA.setVisibility(View.GONE);
-
-
         listE.setAdapter(adapterEnfant);
+
+        listA = (ListView)findViewById(R.id.ListView02);
         listA.setAdapter(adapterActivite);
+
+        listA.setVisibility(View.GONE);
 
         addListenerOnEnfant();
         addListenerOnActivite();
@@ -93,17 +95,18 @@ public class Inscription extends Activity {
 
     private void addListenerOnButton()
     {
-        spinnerEnfant = (Spinner) findViewById(R.id.spinnerEnfant);
+
+        //spinnerEnfant = (Spinner) findViewById(R.id.spinnerEnfant);
         buttonSubmit = (Button) findViewById(R.id.buttonValideInscription);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (String.valueOf(spinnerEnfant.getSelectedItem()).length() > 1) {
+                if (idEnfant.length() > 0 && idActivite.length() > 0) {
 
                     try {
-                        idActivite = Methods.getActiviteId(String.valueOf(spinnerActivite.getSelectedItem()));
-                        idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(spinnerEnfant.getSelectedItem())));
+                        //idActivite = Methods.getActiviteId(String.valueOf(spinnerActivite.getSelectedItem()));
+                        //idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(spinnerEnfant.getSelectedItem())));
                         String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
                         if (response.contains(Constants.CODE_OK)) {
                             Toast.makeText(Inscription.this, "Inscription correctement enregistrée.", Toast.LENGTH_LONG).show();
@@ -120,7 +123,9 @@ public class Inscription extends Activity {
                         e.printStackTrace();
                     }
                 } else {
+                    System.out.println("Valeur enfant" + idEnfant.length() + " " + idActivite.length());
                     Toast.makeText(Inscription.this, "Erreur, champ vide.", Toast.LENGTH_LONG).show();
+                    System.out.println("");
                 }
             }
         });

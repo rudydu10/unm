@@ -26,6 +26,7 @@ public class Main extends AppCompatActivity {
 
         if(Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK))
         {
+            Constants.idParent = preferences.getString("ID","");
         }
         else
         {
