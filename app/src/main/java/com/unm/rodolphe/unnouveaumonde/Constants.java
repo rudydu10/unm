@@ -18,6 +18,7 @@ public class Constants {
     public static final String CODE_ERROR_DROIT_CONNECTION = "204";
 
     public static String idParent;
+    public static Boolean premiereConnection = true;
 
     //SERVER ADDRESS
 

@@ -194,6 +194,20 @@ public class Methods {
         }
     }
 
+    public static String getParentFirstName(String id)
+    {
+        try
+        {
+            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "prenom", "id", id);
+            return response;
+
+        }catch(IOException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getActiviteId(String activite) {
         try
         {
