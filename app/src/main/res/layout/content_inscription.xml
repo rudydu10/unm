@@ -11,38 +11,22 @@
     tools:context="com.unm.rodolphe.unnouveaumonde.Inscription">
 
 
-   /* <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerEnfant"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerActivite"
-        android:layout_below="@+id/spinnerEnfant"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />*/
-
-    <ListView android:id="@+id/ListView01"
+    <ListView android:id="@+id/ListEnfant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </ListView>
 
-    <ListView android:id="@+id/ListView02"
+    <ListView android:id="@+id/ListActivite"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/texteDescription" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Valider"
         android:id="@+id/buttonValideInscription"
-        android:layout_below="@+id/spinnerActivite"
+        android:layout_below="@+id/texteDescription"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -50,34 +34,17 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/texteDescription"
-        android:layout_alignRight="@+id/spinnerActivite"
-        android:layout_alignEnd="@+id/spinnerActivite"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/textViewInutile3" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/MenuPrincipal"
         android:id="@+id/boutonRetour1"
-        android:layout_below="@+id/textViewInutile4"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewInutile3"
-        android:layout_below="@+id/boutonRetour1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewInutile4"
         android:layout_below="@+id/buttonValideInscription"
         android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
