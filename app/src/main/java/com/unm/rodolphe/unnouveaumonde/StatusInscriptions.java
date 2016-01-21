@@ -123,8 +123,6 @@ public class StatusInscriptions extends Activity {
         boutonRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent MainActivite = new Intent(StatusInscriptions.this, Main.class);
-                startActivity(MainActivite);
                 finish();
             }
         });

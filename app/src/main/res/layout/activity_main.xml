@@ -42,4 +42,13 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcorner" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Programme"
+        android:id="@+id/boutonProgramme"
+        android:layout_below="@+id/boutonSiteweb"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundcorner" />
+
 </RelativeLayout>

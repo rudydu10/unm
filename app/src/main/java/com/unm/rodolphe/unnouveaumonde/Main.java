@@ -12,9 +12,11 @@ import android.widget.Button;
 
 public class Main extends AppCompatActivity {
 
-    public Button bouton1;
-    public Button boutonStatus;
-    public Button boutonSiteweb;
+    Button bouton1;
+    Button boutonStatus;
+    Button boutonSiteweb;
+    Button boutonProgramme;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +39,13 @@ public class Main extends AppCompatActivity {
         bouton1 = (Button) findViewById(R.id.bouton1);
         boutonStatus = (Button) findViewById(R.id.boutonStatus);
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
+        boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
 
         bouton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent EnfantsActivite = new Intent(Main.this, Inscription.class);
                 startActivity(EnfantsActivite);
-                finish();
             }
         });
 
@@ -52,7 +54,6 @@ public class Main extends AppCompatActivity {
             public void onClick(View v) {
                 Intent StatusActivite = new Intent(Main.this, StatusInscriptions.class);
                 startActivity(StatusActivite);
-                finish();
             }
         });
 
@@ -63,6 +64,16 @@ public class Main extends AppCompatActivity {
                 startActivity(SiteWeb);
             }
         });
+
+        boutonProgramme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Programme = new Intent(Main.this, Programme.class);
+                startActivity(Programme);
+            }
+        });
+
+
 
     }
 

@@ -86,8 +86,6 @@ public class Inscription extends Activity {
         boutonRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent MainActivite = new Intent(Inscription.this, Main.class);
-                startActivity(MainActivite);
                 finish();
             }
         });
@@ -109,8 +107,6 @@ public class Inscription extends Activity {
                         String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
                         if (response.contains(Constants.CODE_OK)) {
                             Toast.makeText(Inscription.this, "Inscription correctement enregistrée.", Toast.LENGTH_LONG).show();
-                            Intent retourMenu = new Intent(Inscription.this, Main.class);
-                            startActivity(retourMenu);
                             finish();
                         }
                         else if(response.contains(Constants.CODE_ERROR_DUAL_ENTRY))
