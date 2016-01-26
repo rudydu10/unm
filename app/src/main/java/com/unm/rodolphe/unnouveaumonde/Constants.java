@@ -16,6 +16,7 @@ public class Constants {
     public static final String CODE_ERROR_LOGIN = "203";
     public static final String CODE_ERROR_DUAL_ENTRY = "202";
     public static final String CODE_ERROR_DROIT_CONNECTION = "204";
+    public static final String CODE_ERROR_SENPOST_NULL = "205:";
 
     public static String idParent;
     public static Boolean premiereConnection = true;

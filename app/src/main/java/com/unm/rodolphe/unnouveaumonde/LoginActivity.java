@@ -1,6 +1,7 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -80,6 +81,8 @@ public class LoginActivity extends Activity {
                     Toast.makeText(LoginActivity.this, "Erreur, nom d'utilisateur ou mot de passe non renseigne.", Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_ERROR)) {
                     Toast.makeText(LoginActivity.this, "Erreur", Toast.LENGTH_LONG).show();
+                } else if (login.contains(Constants.CODE_ERROR_SENPOST_NULL)) {
+                    Toast.makeText(LoginActivity.this, "Erreur de connexion au serveur", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Erreur", Toast.LENGTH_LONG).show();
                 }
