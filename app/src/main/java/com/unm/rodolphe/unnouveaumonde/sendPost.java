@@ -3,75 +3,86 @@ package com.unm.rodolphe.unnouveaumonde;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class sendPost extends AsyncTask<String, String, String>{
+public class sendPost extends AsyncTask<String, Void, String>{
 
     @Override
-    protected String doInBackground(String... string)
+    protected String doInBackground(String... urls)
     {
-        sendPOSTrequest()
-    }
 
-    private static String sendPOSTrequest(URL obj, String variable, String select, String where, String like) throws IOException {
-
-        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-        connection.setRequestProperty("Accept-Encoding", "");
-        if (Build.VERSION.SDK_INT > 13) {
-            connection.setRequestProperty("Connection", "close");
-        }
-
-        Uri.Builder builder1 = new Uri.Builder().appendQueryParameter(variable, select+":"+where+":"+like);
-
-        String query1 = builder1.build().getEncodedQuery();
-
-        connection.setFixedLengthStreamingMode(query1.getBytes().length);
-
-        connection.setRequestMethod("POST");
-
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
-        OutputStream os = connection.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-        writer.write(query1);
-        writer.flush();
-        writer.close();
-        os.close();
-        connection.connect();
-
-        int responceCode = 0;
-        responceCode = connection.getResponseCode();
-        System.out.println("POST Response Code :: " + responceCode);
-        System.out.println("Variable : " + variable + " valeur : " + select+":"+where+":"+like);
-
-        if (responceCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+        try {
 
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+            URL obj = new URL(urls[0]);
+            String variable = urls[1];
+            String select = urls[2];
+            String where = urls[3];
+            String like = urls[4];
+
+            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+            connection.setRequestProperty("Accept-Encoding", "");
+            if (Build.VERSION.SDK_INT > 13) {
+                connection.setRequestProperty("Connection", "close");
             }
-            in.close();
 
-            System.out.println(response.toString());
-            connection.disconnect();
-            return response.toString();
+            Uri.Builder builder1 = new Uri.Builder().appendQueryParameter(variable, select + ":" + where + ":" + like);
+
+            String query1 = builder1.build().getEncodedQuery();
+
+            connection.setFixedLengthStreamingMode(query1.getBytes().length);
+
+            connection.setRequestMethod("POST");
+
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+            OutputStream os = connection.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+            writer.write(query1);
+            writer.flush();
+            writer.close();
+            os.close();
+            connection.connect();
+
+            int responceCode = 0;
+            responceCode = connection.getResponseCode();
+            System.out.println("POST Response Code :: " + responceCode);
+            System.out.println("Variable : " + variable + " valeur : " + select + ":" + where + ":" + like);
+
+            if (responceCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
 
 
-        } else{
-            System.out.println("POST Dommage");
-            connection.disconnect();
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                System.out.println(response.toString());
+                connection.disconnect();
+                return response.toString();
+
+
+            } else {
+                System.out.println("POST Dommage");
+                connection.disconnect();
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
             return null;
         }
+
+    }
 
 }

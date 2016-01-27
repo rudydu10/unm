@@ -1,62 +1,41 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Build;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Hashtable;
+import java.util.concurrent.TimeUnit;
 
 
 public class Methods {
 
     public static String sendPOST(URL obj, String variable, String select, String where, String like) throws IOException
     {
-        String response = sendPOSTrequest(obj, variable, select, where, like);
-
-        for(int i = 0; i <= 4; i++)
-        {
-
-            if (response.isEmpty())
-            {
-                response = sendPOSTrequest(obj,variable, select, where, like);
-
-            } else {
-                break;
-            }
-            System.out.println("Boucle FOR : i = " + i + " sendPOST response = " + response);
+        String response = "";
+        sendPost sendpost = new sendPost();
+        String[] params = new String[5];
+        params[0] = obj.toString();
+        params[1] = variable;
+        params[2] = select;
+        params[3] = where;
+        params[4] = like;
+        sendpost.execute(params);
+        try {
+            response = sendpost.get(10, TimeUnit.SECONDS);
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("sendPost = " + response);
         return response;
-
-    }
-
-
-
-
-
-    }
-
-    private static void enableStrictMode()
-    {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
     }
 
     public static String encodeMD5(String password)
