@@ -19,6 +19,7 @@ public class Constants {
     public static final String CODE_ERROR_SENPOST_NULL = "205:";
 
     public static String idParent;
+    public static String enfant;
     public static Boolean premiereConnection = true;
 
     //SERVER ADDRESS

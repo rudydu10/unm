@@ -33,6 +33,7 @@ public class Main extends AppCompatActivity {
             Constants.idParent = preferences.getString("ID", "");
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, "Bonjour" + Methods.getParentFirstName(Constants.idParent), Toast.LENGTH_LONG).show();
+                Constants.enfant = Methods.getEnfants(Constants.idParent);
                 Constants.premiereConnection = false;
             }
         } else {
@@ -48,6 +49,11 @@ public class Main extends AppCompatActivity {
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
         boutonNotification = (Button) findViewById(R.id.buttonNotif);
+
+        if(Constants.enfant.contains("null")){
+            bouton1.setEnabled(false);
+            boutonStatus.setEnabled(false);
+        }
 
         bouton1.setOnClickListener(new View.OnClickListener() {
             @Override

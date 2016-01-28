@@ -27,7 +27,7 @@ public class Inscription extends Activity {
     TextView texteDescription;
     Button buttonSubmit;
     Button boutonRetour;
-    Hashtable ht1 = Methods.JSONToHashtable(Methods.getEnfants(Constants.idParent), "id", "enfant");
+    Hashtable ht1 = Methods.JSONToHashtable(Constants.enfant, "id", "enfant");
     Hashtable ht2 = Methods.JSONToHashtable(Methods.getAllActivites(), "id", "activite");
 
     @Override
