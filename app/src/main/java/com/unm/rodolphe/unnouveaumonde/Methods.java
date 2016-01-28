@@ -1,7 +1,5 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.support.annotation.NonNull;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,24 +16,29 @@ public class Methods {
 
     public static String sendPOST(URL obj, String variable, String select, String where, String like) throws IOException
     {
-        String response = "";
-        sendPost sendpost = new sendPost();
-        String[] params = new String[5];
-        params[0] = obj.toString();
-        params[1] = variable;
-        params[2] = select;
-        params[3] = where;
-        params[4] = like;
-        sendpost.execute(params);
-        try {
-            response = sendpost.get(10, TimeUnit.SECONDS);
+        if(isOnline()) {
+            String response = "";
+            sendPost sendpost = new sendPost();
+            String[] params = new String[5];
+            params[0] = obj.toString();
+            params[1] = variable;
+            params[2] = select;
+            params[3] = where;
+            params[4] = like;
+            sendpost.execute(params);
+            try {
+                response = sendpost.get(10, TimeUnit.SECONDS);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Constants.CODE_ERROR_SENPOST_NULL;
+            }
+            System.out.println("sendPost = " + response);
+            return response;
         }
-        catch (Exception e)
+        else
         {
-            e.printStackTrace();
+            return Constants.CODE_ERROR_SENPOST_NULL;
         }
-        System.out.println("sendPost = " + response);
-        return response;
     }
 
     public static String encodeMD5(String password)
@@ -153,7 +156,6 @@ public class Methods {
 
     }
 
-    @NonNull
     public static String login(String username, String password)
     {
         try {
@@ -198,6 +200,21 @@ public class Methods {
             return null;
         }
         return id;
+    }
+
+    public static boolean isOnline() {
+
+        Runtime runtime = Runtime.getRuntime();
+        try {
+
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+
+        } catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
+
+        return false;
     }
 
 }
