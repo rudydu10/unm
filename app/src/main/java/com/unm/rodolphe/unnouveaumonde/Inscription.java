@@ -94,28 +94,33 @@ public class Inscription extends Activity {
             @Override
             public void onClick(View v) {
 
-                if (idEnfant.length() > 0 && idActivite.length() > 0) {
+                try {
 
-                    try {
-                        String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
-                        if (response.contains(Constants.CODE_OK)) {
-                            Toast.makeText(Inscription.this, "Inscription correctement enregistrée.", Toast.LENGTH_LONG).show();
-                            finish();
+
+                    if (idEnfant.length() > 0 && idActivite.length() > 0) {
+
+                        try {
+                            String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
+                            if (response.contains(Constants.CODE_OK)) {
+                                Toast.makeText(Inscription.this, "Inscription correctement enregistrée.", Toast.LENGTH_LONG).show();
+                                finish();
+                            } else if (response.contains(Constants.CODE_ERROR_DUAL_ENTRY)) {
+                                Toast.makeText(Inscription.this, "Erreur, enfant deja inscrit", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(Inscription.this, "Erreur, contactez l'administrateur.", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        else if(response.contains(Constants.CODE_ERROR_DUAL_ENTRY))
-                        {
-                            Toast.makeText(Inscription.this, "Erreur, enfant deja inscrit", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            Toast.makeText(Inscription.this, "Erreur, contactez l'administrateur.", Toast.LENGTH_LONG).show();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } else {
+                        System.out.println("Valeur enfant" + idEnfant.length() + " " + idActivite.length());
+                        Toast.makeText(Inscription.this, "Erreur, champ vide.", Toast.LENGTH_LONG).show();
+                        System.out.println("");
                     }
-                } else {
-                    System.out.println("Valeur enfant" + idEnfant.length() + " " + idActivite.length());
-                    Toast.makeText(Inscription.this, "Erreur, champ vide.", Toast.LENGTH_LONG).show();
-                    System.out.println("");
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(Inscription.this, "Erreur de connexion.", Toast.LENGTH_LONG).show();
                 }
             }
         });

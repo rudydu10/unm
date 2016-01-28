@@ -150,7 +150,7 @@ public class Methods {
         }catch(IOException e)
         {
             e.printStackTrace();
-            return null;
+            return "0";
         }
 
 
