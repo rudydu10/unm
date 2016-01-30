@@ -1,33 +1,56 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
 public class Main extends AppCompatActivity {
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "Main";
 
     Button bouton1;
     Button boutonStatus;
     Button boutonSiteweb;
     Button boutonProgramme;
-    Button boutonNotification;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //Actions a effectuer à la réception d'un message
+
+            }
+        };
+
+        if (checkPlayServices()) {
+            // Demarrer l'IntentService pour enregistrer l'application avec GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
             Constants.idParent = preferences.getString("ID", "");
@@ -48,7 +71,6 @@ public class Main extends AppCompatActivity {
         boutonStatus = (Button) findViewById(R.id.boutonStatus);
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
-        boutonNotification = (Button) findViewById(R.id.buttonNotif);
 
         if(Constants.enfant.contains("null")){
             bouton1.setEnabled(false);
@@ -87,14 +109,19 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        boutonNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createNotification();
-            }
-        });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Constants.REGISTRATION_COMPLETE));
+    }
 
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
     }
 
     @Override
@@ -122,22 +149,23 @@ public class Main extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createNotification() {
-        // Prepare intent which is triggered if the
-        // notification is selected
-        Intent intent = new Intent(this, Programme.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-
-        // Build notification
-        // Actions are just fake
-        Notification noti = new Notification.Builder(this)
-                .setContentTitle("Un Nouveau Monde")
-                .setContentText("Le nouveau programme est sortit !").setSmallIcon(R.drawable.notification)
-                .setContentIntent(pIntent).setVibrate(new long[] {0,200,100,200,100,200}).build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // hide the notification after its selected
-        noti.flags |= Notification.FLAG_AUTO_CANCEL;
-
-        notificationManager.notify(0, noti);
+    /**
+     * Vérifier si notre utilisateur a l'application Google Play Service
+     */
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i(TAG, "Telephone non supporté.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
+
+
 }

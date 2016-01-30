@@ -51,13 +51,4 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcorner" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        android:id="@+id/buttonNotif"
-        android:layout_below="@+id/boutonProgramme"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/roundcorner" />
-
 </RelativeLayout>

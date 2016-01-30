@@ -2,7 +2,7 @@
 
     <item android:id="@+id/deconnection"
         android:title="Deconnection"
-        android:icon="@drawable/ic_setting_light">
+        android:icon="@drawable/notification">
     </item>
 </menu>
 				
