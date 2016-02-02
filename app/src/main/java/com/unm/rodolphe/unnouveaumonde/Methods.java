@@ -1,5 +1,16 @@
 package com.unm.rodolphe.unnouveaumonde;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
+
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -215,6 +226,53 @@ public class Methods {
         catch (InterruptedException e) { e.printStackTrace(); }
 
         return false;
+    }
+
+    public static void sendRegistrationToServer(Context context) {
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        com.unm.rodolphe.unnouveaumonde.OkHttpClient okhttp = new com.unm.rodolphe.unnouveaumonde.OkHttpClient();
+
+        String response = "";
+
+        String[] params =  new String[3];
+
+        params[0] = Constants.KEY_TOKEN;
+        params[1] = preferences.getString("token", "");
+        params[2] = Constants.server_ADDRESS + Constants.register_PHP;
+
+        okhttp.doInBackground(params);
+
+        try {
+            response = okhttp.get(10, TimeUnit.SECONDS);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendUnregistrationToServer(Context context) {
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        com.unm.rodolphe.unnouveaumonde.OkHttpClient okhttp = new com.unm.rodolphe.unnouveaumonde.OkHttpClient();
+
+        String response = "";
+
+        String[] params =  new String[3];
+
+        params[0] = Constants.KEY_TOKEN;
+        params[1] = preferences.getString("token", "");
+        params[2] = Constants.server_ADDRESS + Constants.unregister_PHP;
+
+        okhttp.doInBackground(params);
+
+        try {
+            response = okhttp.get(10, TimeUnit.SECONDS);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 }
