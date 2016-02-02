@@ -5,10 +5,6 @@
         android:title="Paramètres"
         android:icon="@drawable/notification">
 
-    <menu android:id="@+id/sousmenuParametres">
-        <item android:id="@+id/notif"
-            android:title="Notifications PUSH"   />
-    </menu>
     </item>
 
     <item android:id="@+id/deconnection"

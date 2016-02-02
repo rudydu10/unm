@@ -2,6 +2,7 @@ package com.unm.rodolphe.unnouveaumonde;
 
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -10,11 +11,18 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 
 public class RegistrationIntentService extends IntentService {
 
-    public static final String TAG = "RegIntentService";
+    private static final String TAG = "RegIntentService";
+    private static final String KEY_TOKEN = "gcm_token";
 
 
     public RegistrationIntentService() {
@@ -41,7 +49,7 @@ public class RegistrationIntentService extends IntentService {
 
                 // Si le token a déjà été enregistre pas la peine de le renvoyer
                 if (!sharedPreferences.getBoolean(Constants.SENT_TOKEN_TO_SERVER, false))
-                    Methods.sendRegistrationToServer(this);
+                    sendRegistrationToServer(token);
 
                     sharedPreferences.edit().putBoolean(Constants.SENT_TOKEN_TO_SERVER, true).apply();
                     sharedPreferences.edit().putBoolean("serveurRegister", true).apply();
@@ -55,6 +63,28 @@ public class RegistrationIntentService extends IntentService {
 
         Intent registrationComplete = new Intent(Constants.REGISTRATION_COMPLETE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
+    }
+
+    public static void sendRegistrationToServer(String token) {
+
+        com.squareup.okhttp.OkHttpClient client = new com.squareup.okhttp.OkHttpClient();
+
+        RequestBody requestBody = new FormEncodingBuilder()
+                .add(KEY_TOKEN, token)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(Constants.server_ADDRESS + Constants.register_PHP)
+                .post(requestBody)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
