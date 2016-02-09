@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
-import android.os.StrictMode;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -22,20 +19,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 
-import java.io.IOException;
 
 public class Main extends AppCompatActivity {
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static final String REGISTER_URL = Constants.server_ADDRESS + Constants.register_PHP;
 
     private static final String TAG = "Main";
 
@@ -140,7 +128,6 @@ public class Main extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         MenuInflater inflater = getMenuInflater();
 
         inflater.inflate(R.menu.menu, menu);
