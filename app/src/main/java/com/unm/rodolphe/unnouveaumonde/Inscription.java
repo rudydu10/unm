@@ -72,7 +72,6 @@ public class Inscription extends Activity {
         addListenerOnButton();
         buttonSubmit.setVisibility(View.GONE);
         addListenerOnButton2();
-        boutonRetour.setVisibility(View.GONE);
     }
 
     private void addListenerOnButton2() {

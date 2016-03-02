@@ -18,7 +18,7 @@
 
     <ListView android:id="@+id/ListActivite"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_above="@+id/texteDescription" />
 
     <Button
@@ -36,7 +36,6 @@
         android:id="@+id/texteDescription"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
-        />
 
     <Button
         android:layout_width="wrap_content"
