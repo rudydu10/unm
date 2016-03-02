@@ -1,16 +1,5 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
-
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +38,21 @@ public class Methods {
         else
         {
             return Constants.CODE_ERROR_SENPOST_NULL;
+        }
+    }
+
+    public static int countActivity() {
+        String response = "";
+        try {
+            response = sendPOST(new URL(Constants.server_ADDRESS + Constants.count_PHP), "count", "id", "id", "*");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (response.contains("Error")) {
+            return 0;
+        } else {
+            return Integer.parseInt(response.substring(1, response.length()));
         }
     }
 

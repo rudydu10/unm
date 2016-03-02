@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM;
 
 
 import android.app.NotificationManager;
@@ -12,6 +12,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
+import com.unm.rodolphe.unnouveaumonde.Main;
+import com.unm.rodolphe.unnouveaumonde.R;
 
 import java.util.Random;
 

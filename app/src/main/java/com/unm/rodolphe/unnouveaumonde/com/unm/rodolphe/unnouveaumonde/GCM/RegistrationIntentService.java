@@ -1,8 +1,7 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM;
 
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -15,6 +14,8 @@ import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.unm.rodolphe.unnouveaumonde.Constants;
+import com.unm.rodolphe.unnouveaumonde.R;
 
 import java.io.IOException;
 
@@ -27,6 +28,28 @@ public class RegistrationIntentService extends IntentService {
 
     public RegistrationIntentService() {
         super(TAG);
+    }
+
+    public static void sendRegistrationToServer(String token) {
+
+        com.squareup.okhttp.OkHttpClient client = new com.squareup.okhttp.OkHttpClient();
+
+        RequestBody requestBody = new FormEncodingBuilder()
+                .add(KEY_TOKEN, token)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(Constants.server_ADDRESS + Constants.register_PHP)
+                .post(requestBody)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -63,28 +86,6 @@ public class RegistrationIntentService extends IntentService {
 
         Intent registrationComplete = new Intent(Constants.REGISTRATION_COMPLETE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
-    }
-
-    public static void sendRegistrationToServer(String token) {
-
-        com.squareup.okhttp.OkHttpClient client = new com.squareup.okhttp.OkHttpClient();
-
-        RequestBody requestBody = new FormEncodingBuilder()
-                .add(KEY_TOKEN, token)
-                .build();
-
-        Request request = new Request.Builder()
-                .url(Constants.server_ADDRESS + Constants.register_PHP)
-                .post(requestBody)
-                .build();
-
-        try {
-            Response response = client.newCall(request).execute();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
 }

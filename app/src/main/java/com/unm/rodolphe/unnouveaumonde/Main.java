@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM.RegistrationIntentService;
 
 
 public class Main extends AppCompatActivity {
@@ -74,7 +75,7 @@ public class Main extends AppCompatActivity {
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
 
-        if(Constants.enfant.contains("null")){
+        if (Constants.enfant.contains("null") || Methods.countActivity() == 0) {
             bouton1.setEnabled(false);
             boutonStatus.setEnabled(false);
         }
