@@ -1,15 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <item android:id="@+id/parametres"
-        android:title="Paramètres"
-        android:icon="@drawable/notification">
-
-    </item>
-
     <item android:id="@+id/deconnection"
-        android:title="Déconnexion"
-        android:icon="@drawable/notification">
+        android:icon="@drawable/notification"
+        android:title="Déconnexion">
     </item>
 
 </menu>
