@@ -11,7 +11,7 @@ public class Constants {
     public static final String login_PHP = "login.php";
     public static final String inscriptions_PHP = "inscriptions.php";
     public static final String register_PHP = "register.php";
-    public static final String count_PHP = "count.php";
+    public static final String count_PHP = "countActivite.php";
 
     public static final String CODE_ERROR = "42";
     public static final String CODE_OK = "200";
