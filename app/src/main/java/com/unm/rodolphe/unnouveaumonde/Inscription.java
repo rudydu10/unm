@@ -166,7 +166,12 @@ public class Inscription extends Activity {
                 idActivite = Methods.getActiviteId(String.valueOf((listA.getItemAtPosition(position))));
                 Toast.makeText(Inscription.this, idActivite, Toast.LENGTH_LONG).show();
                 try {
+
+                    //TODO integrer DateD et DateF sur le layout
                 texteDescription.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(listA.getItemAtPosition(position))));
+                    String DateD = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datedebut", "activite", String.valueOf(listA.getItemAtPosition(position)));
+                    String DateF = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datefin", "activite", String.valueOf(listA.getItemAtPosition(position)));
+                    System.out.println("Depart : " + DateD + " Fin : " + DateF);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
