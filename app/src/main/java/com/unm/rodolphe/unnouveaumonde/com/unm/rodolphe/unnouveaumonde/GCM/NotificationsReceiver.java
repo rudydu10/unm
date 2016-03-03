@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -6,7 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM.C2DMBroadcastReceiver;
+import com.unm.rodolphe.unnouveaumonde.Programme;
+import com.unm.rodolphe.unnouveaumonde.R;
 
 public class NotificationsReceiver extends C2DMBroadcastReceiver {
 

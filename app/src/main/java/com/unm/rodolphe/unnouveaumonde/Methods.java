@@ -89,20 +89,19 @@ public class Methods {
 
     public static Hashtable JSONToHashtable(String string, String getint, String getstring)
     {
-        Hashtable ht = new Hashtable();
+        Hashtable response = new Hashtable();
+        JSONToHashtable jsonToHashtable = new JSONToHashtable();
+        String[] params = new String[3];
+        params[0] = string;
+        params[1] = getint;
+        params[2] = getstring;
+        jsonToHashtable.execute(params);
         try {
-
-            JSONArray jArray = new JSONArray(string);
-            for(int i=0;i< jArray.length();i++){
-                JSONObject json_data = jArray.getJSONObject(i);
-
-                ht.put(json_data.getInt(getint), json_data.getString(getstring));
-            }
-
-        }catch(JSONException e){
-
+            response = jsonToHashtable.get(10, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return ht;
+        return response;
     }
 
     public static String getEnfants(String idparent) {

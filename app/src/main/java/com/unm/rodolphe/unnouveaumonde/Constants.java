@@ -1,6 +1,5 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import java.util.Date;
 
 public class Constants {
 
@@ -31,5 +30,4 @@ public class Constants {
     //SERVER ADDRESS
     public static String enfant = "null";
     public static Boolean premiereConnection = true;
-    public static Date date = new Date();
 }
