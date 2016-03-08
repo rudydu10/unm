@@ -1,6 +1,5 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +22,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM.RegistrationIntentService;
 
 
-public class Main extends Activity {
+public class Main extends AppCompatActivity {
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 

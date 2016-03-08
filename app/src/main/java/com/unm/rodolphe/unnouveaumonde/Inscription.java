@@ -26,6 +26,7 @@ public class Inscription extends Activity {
     TextView texteDescription;
     Button buttonSubmit;
     Button boutonRetour;
+    Button buttonCancel;
     Hashtable ht1 = Methods.JSONToHashtable(Constants.enfant, "id", "enfant");
     Hashtable ht2 = Methods.JSONToHashtable(Methods.getAllActivites(), "id", "activite");
 
@@ -34,6 +35,7 @@ public class Inscription extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
         boutonRetour = (Button) findViewById(R.id.boutonRetour1);
+        buttonCancel = (Button) findViewById(R.id.boutonAnnuler);
 
         List listEnfant = new ArrayList();
         List listActivite = new ArrayList();
@@ -70,8 +72,10 @@ public class Inscription extends Activity {
         addListenerOnEnfant();
         addListenerOnActivite();
         addListenerOnButton();
-        buttonSubmit.setVisibility(View.GONE);
+        buttonSubmit.setEnabled(false);
+        buttonCancel.setEnabled(false);
         addListenerOnButton2();
+        addListenerOnButton3();
     }
 
     private void addListenerOnButton2() {
@@ -83,10 +87,23 @@ public class Inscription extends Activity {
         });
     }
 
+    private void addListenerOnButton3() {
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listE.clearChoices();
+                listA.clearChoices();
+
+                buttonSubmit.setEnabled(false);
+                buttonCancel.setEnabled(false);
+                listA.setVisibility(View.GONE);
+                listE.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
     private void addListenerOnButton()
     {
-
-        //spinnerEnfant = (Spinner) findViewById(R.id.spinnerEnfant);
         buttonSubmit = (Button) findViewById(R.id.buttonValideInscription);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,11 +163,11 @@ public class Inscription extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(listE.getItemAtPosition(position))));
-                    System.out.print(idEnfant);
-                    listE.setVisibility(View.GONE);
-                    Toast.makeText(Inscription.this, idEnfant, Toast.LENGTH_LONG).show();
-                    listA.setVisibility(View.VISIBLE);
+                idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(listE.getItemAtPosition(position))));
+                System.out.print(idEnfant);
+                listE.setVisibility(View.GONE);
+                listA.setVisibility(View.VISIBLE);
+                buttonCancel.setEnabled(true);
 
             }
         });
@@ -164,7 +181,6 @@ public class Inscription extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 idActivite = Methods.getActiviteId(String.valueOf((listA.getItemAtPosition(position))));
-                Toast.makeText(Inscription.this, idActivite, Toast.LENGTH_LONG).show();
                 try {
 
                     //TODO integrer DateD et DateF sur le layout
@@ -175,8 +191,7 @@ public class Inscription extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                buttonSubmit.setVisibility(View.VISIBLE);
-                boutonRetour.setVisibility(view.VISIBLE);
+                buttonSubmit.setEnabled(true);
             }
         });
     }
