@@ -132,13 +132,13 @@ public class Methods {
         {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "id", "username", username);
             if (response.equals(Constants.CODE_ERROR_SENPOST_NULL)) {
-                return "0";
+                return "nope";
             }
             return response;
         }catch(IOException e)
         {
             e.printStackTrace();
-            return "0";
+            return "nope";
         }
     }
 

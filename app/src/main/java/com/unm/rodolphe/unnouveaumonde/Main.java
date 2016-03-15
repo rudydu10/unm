@@ -55,7 +55,7 @@ public class Main extends AppCompatActivity {
             }
 
         if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
-            Constants.idParent = preferences.getInt("ID", 0);
+            Constants.idParent = preferences.getString("ID", "");
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, "Bonjour" + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
                 Constants.enfant = Methods.getEnfants(String.valueOf(Constants.idParent));
