@@ -17,7 +17,6 @@ public class Methods {
     public static String sendPOST(URL obj, String variable, String select, String where, String like) throws IOException
     {
         if(isOnline()) {
-            String response = "";
             sendPost sendpost = new sendPost();
             String[] params = new String[5];
             params[0] = obj.toString();
@@ -27,13 +26,15 @@ public class Methods {
             params[4] = like;
             sendpost.execute(params);
             try {
-                response = sendpost.get(10, TimeUnit.SECONDS);
+                String response = sendpost.get(10, TimeUnit.SECONDS);
+                if (response == null) {
+                    return Constants.CODE_ERROR_SENPOST_NULL;
+                }
+                return response;
             } catch (Exception e) {
                 e.printStackTrace();
                 return Constants.CODE_ERROR_SENPOST_NULL;
             }
-            System.out.println("sendPost = " + response);
-            return response;
         }
         else
         {
@@ -59,7 +60,7 @@ public class Methods {
     public static String encodeMD5(String password)
     {
         byte[] uniqueKey = password.getBytes();
-        byte[] hash = null;
+        byte[] hash;
 
         try
         {
@@ -71,6 +72,7 @@ public class Methods {
         }
 
         StringBuilder hashString = new StringBuilder();
+
         for (int i = 0; i < hash.length; i++)
         {
             String hex = Integer.toHexString(hash[i]);
@@ -106,8 +108,7 @@ public class Methods {
 
     public static String getEnfants(String idparent) {
         try {
-            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id,enfant", "idparent", idparent);
-            return response;
+            return sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id,enfant", "idparent", idparent);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -117,8 +118,7 @@ public class Methods {
 
     public static String getAllActivites() {
         try {
-            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
-            return response;
+            return sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -131,12 +131,14 @@ public class Methods {
         try
         {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "id", "username", username);
+            if (response.equals(Constants.CODE_ERROR_SENPOST_NULL)) {
+                return "0";
+            }
             return response;
-
         }catch(IOException e)
         {
             e.printStackTrace();
-            return null;
+            return "0";
         }
     }
 
@@ -144,9 +146,7 @@ public class Methods {
     {
         try
         {
-            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "prenom", "id", id);
-            return response;
-
+            return sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "prenom", "id", id);
         }catch(IOException e)
         {
             e.printStackTrace();

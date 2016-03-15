@@ -1,22 +1,16 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.net.URL;
 
 public class LoginActivity extends Activity {
 
@@ -43,11 +37,7 @@ public class LoginActivity extends Activity {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
     private void addListenerOnButton()
@@ -65,10 +55,12 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String login = Methods.login(Username.getText().toString(), Password.getText().toString());
+                int idparent = Integer.parseInt(Methods.getParentId(Username.getText().toString()).replaceAll("\t", ""));
                 if (login.contains(Constants.CODE_OK)) {
                     editor.putString("USERNAME", Username.getText().toString());
                     editor.putString("PASSWORD", Password.getText().toString());
-                    editor.putString("ID", Methods.getParentId(Username.getText().toString()).replaceAll("\t", "").toString());
+                    if (idparent != 0)
+                        editor.putInt("ID", idparent);
                     editor.apply();
                     Intent MainActivite = new Intent(LoginActivity.this, Main.class);
                     startActivity(MainActivite);

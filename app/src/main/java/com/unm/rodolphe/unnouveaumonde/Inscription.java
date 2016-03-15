@@ -53,11 +53,11 @@ public class Inscription extends Activity {
         }
 
 
-        ArrayAdapter<String> adapterEnfant = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listEnfant);
+        ArrayAdapter<String> adapterEnfant = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
         adapterEnfant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        ArrayAdapter<String> adapterActivite = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listActivite);
+        ArrayAdapter<String> adapterActivite = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listActivite);
         adapterActivite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
@@ -98,6 +98,7 @@ public class Inscription extends Activity {
                 buttonCancel.setEnabled(false);
                 listA.setVisibility(View.GONE);
                 listE.setVisibility(View.VISIBLE);
+                texteDescription.setText("");
             }
         });
     }
@@ -146,9 +147,7 @@ public class Inscription extends Activity {
     {
         try
         {
-            String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id", "enfant", enfant);
-            return response;
-
+            return Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id", "enfant", enfant);
         }catch(IOException e)
         {
             e.printStackTrace();

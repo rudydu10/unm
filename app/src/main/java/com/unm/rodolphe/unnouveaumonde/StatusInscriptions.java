@@ -1,12 +1,7 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,7 +19,7 @@ import java.util.List;
 public class StatusInscriptions extends Activity {
     Spinner spinnerenfant;
     Spinner spinneractivite;
-    Hashtable htenfant = Methods.JSONToHashtable(Methods.getEnfants(Constants.idParent), "id", "enfant");
+    Hashtable htenfant = Methods.JSONToHashtable(Methods.getEnfants(String.valueOf(Constants.idParent)), "id", "enfant");
     Hashtable htactivite;
 
     Button boutonRetour;
@@ -48,7 +43,7 @@ public class StatusInscriptions extends Activity {
             listenfant.add(e1.nextElement());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listenfant);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listenfant);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerenfant.setAdapter(adapter);
     }
@@ -95,12 +90,12 @@ public class StatusInscriptions extends Activity {
                     if(valide.contains("1"))
                     {
                         textStatus.setVisibility(View.VISIBLE);
-                        textStatus.setText("Inscription validée");
+                        textStatus.setText(R.string.inscriptionvalide);
                     }
                     else if(valide.contains("0"))
                     {
                         textStatus.setVisibility(View.VISIBLE);
-                        textStatus.setText("Inscription en attente");
+                        textStatus.setText(R.string.inscriptionattente);
                     }
                     else
                     {

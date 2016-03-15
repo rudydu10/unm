@@ -3,6 +3,7 @@ package com.unm.rodolphe.unnouveaumonde;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -50,15 +51,14 @@ public class sendPost extends AsyncTask<String, Void, String>{
             os.close();
             connection.connect();
 
-            int responceCode = 0;
-            responceCode = connection.getResponseCode();
+            int responceCode = connection.getResponseCode();
             System.out.println("POST Response Code :: " + responceCode);
             System.out.println("Variable : " + variable + " valeur : " + select + ":" + where + ":" + like);
 
             if (responceCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuffer response = new StringBuffer();
+                StringBuilder response = new StringBuilder();
 
 
                 while ((inputLine = in.readLine()) != null) {

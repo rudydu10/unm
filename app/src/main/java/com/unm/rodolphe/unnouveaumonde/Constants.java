@@ -25,7 +25,7 @@ public class Constants {
     public static final String server_ADDRESS = "http://www.un-nouveau-monde.fr/app/android/";
     public static final String webserver_ADDRESS = "http://www.un-nouveau-monde.fr/";
     public static final String programme_ADDRESS = "http://www.un-nouveau-monde.fr/app/android/programme/programme.html";
-    public static String idParent;
+    public static int idParent;
 
     //SERVER ADDRESS
     public static String enfant = "null";
