@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
@@ -98,8 +99,8 @@ public class Main extends AppCompatActivity {
         boutonSiteweb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent SiteWeb = new Intent(Main.this, web.class);
-                startActivity(SiteWeb);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.webserver_ADDRESS));
+                startActivity(intent);
             }
         });
 

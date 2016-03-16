@@ -12,7 +12,7 @@ public class JSONToHashtable extends AsyncTask<String, Void, Hashtable> {
 
     @Override
     protected Hashtable doInBackground(String... strings) {
-        Hashtable ht = new Hashtable();
+        Hashtable<Integer, String> ht = new Hashtable<>();
 
         String string = strings[0];
         String getint = strings[1];

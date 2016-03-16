@@ -50,12 +50,6 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".web"
-            android:label="@string/title_activity_web"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".Programme"
             android:label="@string/title_activity_programme"
             android:screenOrientation="portrait"

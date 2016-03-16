@@ -30,7 +30,7 @@ public class StatusInscriptions extends Activity {
         setContentView(R.layout.activity_status_inscriptions);
         spinnerenfant = (Spinner) findViewById(R.id.spinnerEnfant2);
         spinneractivite = (Spinner) findViewById(R.id.spinnerActivites2);
-        List listenfant = new ArrayList();
+        List<Object> listenfant = new ArrayList<>();
         Enumeration e1 = htenfant.elements();
         boutonRetour = (Button) findViewById(R.id.boutonRetour2);
 
@@ -43,7 +43,7 @@ public class StatusInscriptions extends Activity {
             listenfant.add(e1.nextElement());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listenfant);
+        ArrayAdapter<Object> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listenfant);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerenfant.setAdapter(adapter);
     }
@@ -56,14 +56,14 @@ public class StatusInscriptions extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     htactivite = Methods.JSONToHashtable(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscriptions_PHP), "inscriptions", "idactivite", "idenfant", String.valueOf(spinnerenfant.getSelectedItem())), "id", "activite");
-                    List listactivite = new ArrayList();
+                    List<Object> listactivite = new ArrayList<>();
                     listactivite.clear();
                     Enumeration e2 = htactivite.elements();
 
                     while (e2.hasMoreElements()) {
                         listactivite.add(e2.nextElement());
                     }
-                    ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listactivite);
+                    ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listactivite);
                     adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinneractivite.setAdapter(adapter2);
                 } catch (IOException e) {

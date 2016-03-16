@@ -73,9 +73,9 @@ public class Methods {
 
         StringBuilder hashString = new StringBuilder();
 
-        for (int i = 0; i < hash.length; i++)
+        for (Byte iterator : hash)
         {
-            String hex = Integer.toHexString(hash[i]);
+            String hex = Integer.toHexString(iterator);
             if(hex.length() == 1)
             {
                 hashString.append('0');
@@ -225,8 +225,9 @@ public class Methods {
             int     exitValue = ipProcess.waitFor();
             return (exitValue == 0);
 
-        } catch (IOException e)          { e.printStackTrace(); }
-        catch (InterruptedException e) { e.printStackTrace(); }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return false;
     }

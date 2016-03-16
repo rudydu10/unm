@@ -36,9 +36,10 @@ public class Inscription extends Activity {
         setContentView(R.layout.activity_inscription);
         boutonRetour = (Button) findViewById(R.id.boutonRetour1);
         buttonCancel = (Button) findViewById(R.id.boutonAnnuler);
+        buttonSubmit = (Button) findViewById(R.id.buttonValideInscription);
 
-        List listEnfant = new ArrayList();
-        List listActivite = new ArrayList();
+        List<Object> listEnfant = new ArrayList<>();
+        List<Object> listActivite = new ArrayList<>();
         Enumeration e1 = ht1.elements();
         Enumeration e2 = ht2.elements();
 
@@ -53,11 +54,11 @@ public class Inscription extends Activity {
         }
 
 
-        ArrayAdapter<String> adapterEnfant = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
+        ArrayAdapter<Object> adapterEnfant = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
         adapterEnfant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        ArrayAdapter<String> adapterActivite = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listActivite);
+        ArrayAdapter<Object> adapterActivite = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listActivite);
         adapterActivite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
@@ -71,39 +72,22 @@ public class Inscription extends Activity {
 
         addListenerOnEnfant();
         addListenerOnActivite();
-        addListenerOnButton();
+
         buttonSubmit.setEnabled(false);
         buttonCancel.setEnabled(false);
+
+        //Bouton Valider
+        addListenerOnButton1();
+
+        //Bouton Menu Principal
         addListenerOnButton2();
+
+        //Bouton Annuler
         addListenerOnButton3();
     }
 
-    private void addListenerOnButton2() {
-        boutonRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    private void addListenerOnButton3() {
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listE.clearChoices();
-                listA.clearChoices();
-
-                buttonSubmit.setEnabled(false);
-                buttonCancel.setEnabled(false);
-                listA.setVisibility(View.GONE);
-                listE.setVisibility(View.VISIBLE);
-                texteDescription.setText("");
-            }
-        });
-    }
-
-    private void addListenerOnButton()
+    //Bouton Valider
+    private void addListenerOnButton1()
     {
         buttonSubmit = (Button) findViewById(R.id.buttonValideInscription);
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +126,35 @@ public class Inscription extends Activity {
         });
 
     }
+
+    //Bouton Menu Principal
+    private void addListenerOnButton2() {
+        boutonRetour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    //Bouton Annuler
+    private void addListenerOnButton3() {
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listE.clearChoices();
+                listA.clearChoices();
+
+                buttonSubmit.setEnabled(false);
+                buttonCancel.setEnabled(false);
+                listA.setVisibility(View.GONE);
+                listE.setVisibility(View.VISIBLE);
+                texteDescription.setText("");
+            }
+        });
+    }
+
+
 
     private String getEnfantId(String enfant)
     {
