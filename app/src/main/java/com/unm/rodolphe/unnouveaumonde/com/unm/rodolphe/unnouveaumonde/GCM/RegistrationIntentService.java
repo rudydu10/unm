@@ -13,7 +13,6 @@ import com.google.android.gms.iid.InstanceID;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
 import com.unm.rodolphe.unnouveaumonde.Constants;
 import com.unm.rodolphe.unnouveaumonde.R;
 
@@ -44,7 +43,7 @@ public class RegistrationIntentService extends IntentService {
                 .build();
 
         try {
-            Response response = client.newCall(request).execute();
+            client.newCall(request).execute();
 
         } catch (IOException e) {
             e.printStackTrace();
