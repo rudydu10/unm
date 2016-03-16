@@ -52,8 +52,6 @@ public class sendPost extends AsyncTask<String, Void, String>{
             connection.connect();
 
             int responceCode = connection.getResponseCode();
-            System.out.println("POST Response Code :: " + responceCode);
-            System.out.println("Variable : " + variable + " valeur : " + select + ":" + where + ":" + like);
 
             if (responceCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -72,7 +70,6 @@ public class sendPost extends AsyncTask<String, Void, String>{
 
 
             } else {
-                System.out.println("POST Dommage");
                 connection.disconnect();
                 return null;
             }
@@ -84,6 +81,5 @@ public class sendPost extends AsyncTask<String, Void, String>{
         }
 
     }
-
 
 }

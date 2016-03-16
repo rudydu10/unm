@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +26,6 @@ public class Main extends AppCompatActivity {
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
-    private static final String TAG = "Main";
 
     Button bouton1;
     Button boutonStatus;
@@ -58,7 +56,7 @@ public class Main extends AppCompatActivity {
         if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
             Constants.idParent = preferences.getString("ID", "");
             if (Constants.premiereConnection) {
-                Toast.makeText(Main.this, "Bonjour" + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
+                Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
                 Constants.enfant = Methods.getEnfants(String.valueOf(Constants.idParent));
                 Constants.premiereConnection = false;
             }
@@ -166,7 +164,6 @@ public class Main extends AppCompatActivity {
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this,
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
-                Log.i(TAG, "Telephone non supporté.");
                 finish();
             }
             return false;

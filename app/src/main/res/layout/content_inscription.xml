@@ -29,20 +29,20 @@
         android:id="@+id/buttonValideInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/texteDescription"
-        android:layout_toEndOf="@+id/texteDescription"
-        android:layout_toRightOf="@+id/texteDescription"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
         android:background="@drawable/roundcorner"
-        android:text="Valider"
+        android:text="@string/validate"
         android:theme="@style/AlertDialog.AppCompat" />
 
     <TextView
         android:id="@+id/texteDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2"
         android:text="" />
 
     <Button
@@ -52,7 +52,7 @@
         android:layout_below="@+id/buttonValideInscription"
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcorner"
-        android:text="@string/MenuPrincipal" />
+        android:text="@string/mainmenu" />
 
     <Button
         android:id="@+id/boutonAnnuler"
@@ -62,8 +62,17 @@
         android:layout_toLeftOf="@+id/buttonValideInscription"
         android:layout_toStartOf="@+id/buttonValideInscription"
         android:background="@drawable/roundcorner"
-        android:text="Annuler"
+        android:text="@string/cancel"
         android:theme="@style/AlertDialog.AppCompat" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:text="" />
 
 
 </RelativeLayout>

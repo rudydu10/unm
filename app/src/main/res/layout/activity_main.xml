@@ -15,7 +15,7 @@
         android:layout_above="@+id/boutonStatus"
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcorner"
-        android:text="Inscription" />
+        android:text="@string/inscription" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/roundcorner"
-        android:text="Status Inscriptions" />
+        android:text="@string/statusinscriptions" />
 
     <Button
         android:id="@+id/boutonSiteweb"
@@ -42,7 +42,7 @@
         android:layout_below="@+id/boutonStatus"
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcorner"
-        android:text="Site Web" />
+        android:text="@string/siteweb" />
 
     <Button
         android:id="@+id/boutonProgramme"
@@ -51,6 +51,6 @@
         android:layout_below="@+id/boutonSiteweb"
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcorner"
-        android:text="Programme" />
+        android:text="@string/programme" />
 
 </RelativeLayout>

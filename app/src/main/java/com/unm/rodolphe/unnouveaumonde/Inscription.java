@@ -102,25 +102,24 @@ public class Inscription extends Activity {
                         try {
                             String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
                             if (response.contains(Constants.CODE_OK)) {
-                                Toast.makeText(Inscription.this, "Inscription correctement enregistrée.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Inscription.this, getResources().getString(R.string.signingok), Toast.LENGTH_LONG).show();
                                 finish();
                             } else if (response.contains(Constants.CODE_ERROR_DUAL_ENTRY)) {
-                                Toast.makeText(Inscription.this, "Erreur, enfant deja inscrit", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Inscription.this, getResources().getString(R.string.errorchildsigning), Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(Inscription.this, "Erreur, contactez l'administrateur.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Inscription.this, getResources().getString(R.string.errorcontactadministrator), Toast.LENGTH_LONG).show();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        System.out.println("Valeur enfant" + idEnfant.length() + " " + idActivite.length());
-                        Toast.makeText(Inscription.this, "Erreur, champ vide.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Inscription.this, getResources().getString(R.string.errorfieldempty), Toast.LENGTH_LONG).show();
                         System.out.println("");
                     }
                 }catch (Exception e)
                 {
                     e.printStackTrace();
-                    Toast.makeText(Inscription.this, "Erreur de connexion.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Inscription.this, getResources().getString(R.string.errorconnexion), Toast.LENGTH_LONG).show();
                 }
             }
         });

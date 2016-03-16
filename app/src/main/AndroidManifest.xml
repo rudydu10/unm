@@ -68,7 +68,7 @@
         </receiver>
 
         <service
-            android:name=".com.unm.rodolphe.unnouveaumonde.GCM.MyGcmListenerService"
+            android:name=".com$unm$rodolphe$unnouveaumonde$GCM.MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -76,7 +76,7 @@
         </service>
 
         <service
-            android:name=".com.unm.rodolphe.unnouveaumonde.GCM.MyInstanceIDListenerService"
+            android:name=".com.unm$rodolphe$unnouveaumonde$GCM.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -84,7 +84,7 @@
         </service>
 
         <service
-            android:name=".com.unm.rodolphe.unnouveaumonde.GCM.RegistrationIntentService"
+            android:name=".com$unm$rodolphe$unnouveaumonde$GCM.RegistrationIntentService"
             android:exported="false">
         </service>
 

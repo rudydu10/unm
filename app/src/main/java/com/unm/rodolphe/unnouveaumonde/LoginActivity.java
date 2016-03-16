@@ -66,17 +66,17 @@ public class LoginActivity extends Activity {
                     startActivity(MainActivite);
                     finish();
                 } else if (login.contains(Constants.CODE_ERROR_LOGIN)) {
-                    Toast.makeText(LoginActivity.this, "Erreur, nom d'utilisateur ou mot de passe incorrect.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "", Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_ERROR_DROIT_CONNECTION)) {
-                    Toast.makeText(LoginActivity.this, "Erreur, vous n'avez pas acces a l'application, contactez l'association.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.badusername), Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_MISSING)) {
-                    Toast.makeText(LoginActivity.this, "Erreur, nom d'utilisateur ou mot de passe non renseigne.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.usernameorpasswordmissing), Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_ERROR)) {
-                    Toast.makeText(LoginActivity.this, "Erreur", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_ERROR_SENPOST_NULL)) {
-                    Toast.makeText(LoginActivity.this, "Erreur de connexion au serveur", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.errorconnexion), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Erreur", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                 }
 
             }

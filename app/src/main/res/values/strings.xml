@@ -1,22 +1,37 @@
 <resources>
     <string name="app_name">Un Nouveau Monde</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Paramètres</string>
     <string name="title_activity_parent">parent</string>
     <string name="title_activity_enfants">Enfants</string>
     <string name="envoyer">Envoyer</string>
     <string name="title_activity_activites">Activités</string>
     <string name="title_activity_login">Un Nouveau Monde</string>
-    <string name="description_username">Nom d\'utilisateur</string>
-    <string name="description_password">Mot de passe</string>
     <string name="title_activity_statusinscription">Status des Inscriptions</string>
     <string name="title_activity_status_inscription">Inscriptions</string>
     <string name="title_activity_status_inscriptions">Status des Inscriptions</string>
-    <string name="MenuPrincipal">Menu Principal</string>
     <string name="notification">Notification Un Nouveau Monde</string>
     <string name="inscriptionvalide">Inscription validée</string>
     <string name="inscriptionattente">Inscription en attente</string>
+    <string name="badusername">Erreur, nom d\'utilisateur ou mot de passe incorrect.</string>
+    <string name="usernameorpasswordmissing">Erreur, nom d\'utilisateur ou mot de passe non renseigné.</string>
+    <string name="error">Erreur.</string>
+    <string name="errorconnexion">Erreur de connexion.</string>
+    <string name="inscription">Inscription</string>
+    <string name="statusinscriptions">Status Inscriptions</string>
+    <string name="siteweb">Site Web</string>
+    <string name="programme">Programme</string>
+    <string name="hello">Bonjour</string>
+    <string name="errorcontactadministrator">Erreur, contactez l\'administrateur.</string>
+    <string name="errorchildsigning">Erreur, enfant deja inscrit</string>
+    <string name="signingok">Inscription correctement enregistrée.</string>
+    <string name="errorfieldempty">Erreur, champ vide.</string>
+    <string name="username">Nom d\'utilisateur :</string>
+    <string name="password">Mot de passe :</string>
+    <string name="cancel">Annuler</string>
+    <string name="validate">Valider</string>
+    <string name="mainmenu">Menu Principal</string>
+    <string name="state">Etat :</string>
 
     <!-- Strings related to Settings -->
 

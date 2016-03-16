@@ -157,10 +157,7 @@ public class Methods {
     public static String getActiviteId(String activite) {
         try
         {
-            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id, activite", "activite", activite);
-            response = JSONtoStringID(response);
-            return response;
-
+            return JSONtoStringID(sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id, activite", "activite", activite));
         }catch(IOException e)
         {
             e.printStackTrace();
