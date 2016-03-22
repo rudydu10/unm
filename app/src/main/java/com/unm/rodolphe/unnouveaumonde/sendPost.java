@@ -34,7 +34,7 @@ public class sendPost extends AsyncTask<String, Void, String>{
             }
 
             Uri.Builder builder1 = new Uri.Builder().appendQueryParameter(variable, select + ":" + where + ":" + like);
-
+            System.out.println("Variable : " + variable + " " + select + " : " + where + " : " + like);
             String query1 = builder1.build().getEncodedQuery();
 
             connection.setFixedLengthStreamingMode(query1.getBytes().length);

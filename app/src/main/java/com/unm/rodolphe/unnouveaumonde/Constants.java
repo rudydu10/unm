@@ -1,6 +1,12 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 
+import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
+import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Constants {
 
     //SCRIPTS
@@ -28,6 +34,7 @@ public class Constants {
     public static String idParent;
 
     //SERVER ADDRESS
-    public static String enfant = "null";
+    public static List<Enfant> enfant = new ArrayList<>();
+    public static List<Activite> activites = new ArrayList<>();
     public static Boolean premiereConnection = true;
 }

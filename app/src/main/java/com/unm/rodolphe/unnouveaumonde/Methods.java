@@ -1,14 +1,14 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
+import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
 
 import java.io.IOException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -39,21 +39,6 @@ public class Methods {
         else
         {
             return Constants.CODE_ERROR_SENPOST_NULL;
-        }
-    }
-
-    public static int countActivity() {
-        String response = "";
-        try {
-            response = sendPOST(new URL(Constants.server_ADDRESS + Constants.count_PHP), "count", "id", "id", "*");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (response.contains("Error")) {
-            return 0;
-        } else {
-            return Integer.parseInt(response.substring(1, response.length()));
         }
     }
 
@@ -89,17 +74,29 @@ public class Methods {
         return hashString.toString();
     }
 
-    public static Hashtable JSONToHashtable(String string, String getint, String getstring)
+    public static List<Enfant> JSONToEnfant(String string)
     {
-        Hashtable response = new Hashtable();
-        JSONToHashtable jsonToHashtable = new JSONToHashtable();
+        List<Enfant> response = new ArrayList<>();
+        JSONToEnfant jsonToEnfant = new JSONToEnfant();
+        String[] params = new String[1];
+        params[0] = string;
+        jsonToEnfant.execute(params);
+        try {
+            response = jsonToEnfant.get(10, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public static List<Activite> JSONToActivite(String string) {
+        List<Activite> response = new ArrayList<>();
+        JSONToActivite jsonToActivite = new JSONToActivite();
         String[] params = new String[3];
         params[0] = string;
-        params[1] = getint;
-        params[2] = getstring;
-        jsonToHashtable.execute(params);
+        jsonToActivite.execute(params);
         try {
-            response = jsonToHashtable.get(10, TimeUnit.SECONDS);
+            response = jsonToActivite.get(10, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,36 +151,23 @@ public class Methods {
         }
     }
 
-    public static String getActiviteId(String activite) {
-        try
-        {
-            return JSONtoStringID(sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id, activite", "activite", activite));
-        }catch(IOException e)
-        {
-            e.printStackTrace();
-            return "0";
-        }
-
-
-    }
-
     public static String login(String username, String password)
     {
         try {
-            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.login_PHP), "login", "password", "username", username + ":" + password);
-            if(response.contains(encodeMD5(password)))
+            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.login_PHP), "login", "password", "username", username + ":" + password).replace("\t", "").replace("\r", "").replace("\n", "").replace("\f", "");
+            String passwd = response.substring(0, 32);
+            Constants.idParent = response.substring(32);
+
+            if (passwd.contains(encodeMD5(password)))
             {
                 return Constants.CODE_OK;
-            }
-            else if(response.contains(Constants.CODE_ERROR_DROIT_CONNECTION))
+            } else if (passwd.contains(Constants.CODE_ERROR_DROIT_CONNECTION))
             {
                 return Constants.CODE_ERROR_DROIT_CONNECTION;
-            }
-            else if(response.contains(Constants.CODE_MISSING))
+            } else if (passwd.contains(Constants.CODE_MISSING))
             {
                 return Constants.CODE_MISSING;
-            }
-            else if(response.contains(Constants.CODE_ERROR_LOGIN))
+            } else if (passwd.contains(Constants.CODE_ERROR_LOGIN))
             {
                 return Constants.CODE_ERROR_LOGIN;
             }
@@ -195,22 +179,6 @@ public class Methods {
             e.printStackTrace();
             return Constants.CODE_ERROR_SENPOST_NULL;
         }
-    }
-
-    public static String JSONtoStringID(String string) {
-        String id = null;
-        try {
-
-            JSONArray jArray = new JSONArray(string);
-            for (int i = 0; i < jArray.length(); i++) {
-                JSONObject json_data = jArray.getJSONObject(i);
-                id = Integer.toString(json_data.getInt("id"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return id;
     }
 
     public static boolean isOnline() {

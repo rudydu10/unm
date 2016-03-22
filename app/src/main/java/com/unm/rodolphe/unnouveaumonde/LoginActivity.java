@@ -55,12 +55,10 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String login = Methods.login(Username.getText().toString(), Password.getText().toString());
-                String idparent = Methods.getParentId(Username.getText().toString()).replaceAll("\t", "");
                 if (login.contains(Constants.CODE_OK)) {
                     editor.putString("USERNAME", Username.getText().toString());
                     editor.putString("PASSWORD", Password.getText().toString());
-                    if (idparent.contains("nope"))
-                        editor.putString("ID", idparent);
+                    editor.putString("ID", Constants.idParent);
                     editor.apply();
                     Intent MainActivite = new Intent(LoginActivity.this, Main.class);
                     startActivity(MainActivite);

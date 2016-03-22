@@ -54,10 +54,13 @@ public class Main extends AppCompatActivity {
             }
 
         if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
-            Constants.idParent = preferences.getString("ID", "");
+            Constants.idParent = preferences.getString("ID", "0");
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
-                Constants.enfant = Methods.getEnfants(String.valueOf(Constants.idParent));
+                if (!Constants.idParent.equals("0")) {
+                    Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
+                    Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
+                }
                 Constants.premiereConnection = false;
             }
         } else {
@@ -73,7 +76,7 @@ public class Main extends AppCompatActivity {
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
 
-        if (Constants.enfant.contains("null") || Methods.countActivity() == 0) {
+        if (Constants.enfant.isEmpty() || Constants.activites.isEmpty()) {
             bouton1.setEnabled(false);
             boutonStatus.setEnabled(false);
         }

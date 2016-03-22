@@ -10,11 +10,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
+import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.List;
 
 public class Inscription extends Activity {
@@ -27,8 +28,6 @@ public class Inscription extends Activity {
     Button buttonSubmit;
     Button boutonRetour;
     Button buttonCancel;
-    Hashtable ht1 = Methods.JSONToHashtable(Constants.enfant, "id", "enfant");
-    Hashtable ht2 = Methods.JSONToHashtable(Methods.getAllActivites(), "id", "activite");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +36,14 @@ public class Inscription extends Activity {
         boutonRetour = (Button) findViewById(R.id.boutonRetour1);
         buttonCancel = (Button) findViewById(R.id.boutonAnnuler);
         buttonSubmit = (Button) findViewById(R.id.buttonValideInscription);
-
         List<Object> listEnfant = new ArrayList<>();
         List<Object> listActivite = new ArrayList<>();
-        Enumeration e1 = ht1.elements();
-        Enumeration e2 = ht2.elements();
 
-        while (e1.hasMoreElements())
-        {
-            listEnfant.add(e1.nextElement());
-        }
+        for (Enfant enfant : Constants.enfant)
+            listEnfant.add(enfant.getEnfant());
 
-        while (e2.hasMoreElements())
-        {
-            listActivite.add(e2.nextElement());
-        }
-
+        for (Activite activite : Constants.activites)
+            listActivite.add(activite.getActivite());
 
         ArrayAdapter<Object> adapterEnfant = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
         adapterEnfant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,20 +144,6 @@ public class Inscription extends Activity {
         });
     }
 
-
-
-    private String getEnfantId(String enfant)
-    {
-        try
-        {
-            return Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id", "enfant", enfant);
-        }catch(IOException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     private void addListenerOnEnfant()
     {
         texteDescription = (TextView) findViewById(R.id.texteDescription);
@@ -174,8 +151,9 @@ public class Inscription extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                idEnfant = Methods.JSONtoStringID(getEnfantId(String.valueOf(listE.getItemAtPosition(position))));
-                System.out.print(idEnfant);
+                for (Enfant enfant : Constants.enfant)
+                    if (listE.getItemAtPosition(position).equals(enfant.getEnfant()))
+                        idEnfant = String.valueOf(enfant.getId());
                 listE.setVisibility(View.GONE);
                 listA.setVisibility(View.VISIBLE);
                 buttonCancel.setEnabled(true);
@@ -191,7 +169,9 @@ public class Inscription extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                idActivite = Methods.getActiviteId(String.valueOf((listA.getItemAtPosition(position))));
+                for (Activite activite : Constants.activites)
+                    if (listA.getItemAtPosition(position).equals(activite.getActivite()))
+                        idActivite = String.valueOf(activite.getId());
                 try {
 
                     //TODO integrer DateD et DateF sur le layout

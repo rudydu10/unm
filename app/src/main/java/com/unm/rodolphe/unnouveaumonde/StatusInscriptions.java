@@ -9,18 +9,17 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
+import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Hashtable;
 import java.util.List;
 
 public class StatusInscriptions extends Activity {
     Spinner spinnerenfant;
     Spinner spinneractivite;
-    Hashtable htenfant = Methods.JSONToHashtable(Methods.getEnfants(String.valueOf(Constants.idParent)), "id", "enfant");
-    Hashtable htactivite;
 
     Button boutonRetour;
 
@@ -30,20 +29,18 @@ public class StatusInscriptions extends Activity {
         setContentView(R.layout.activity_status_inscriptions);
         spinnerenfant = (Spinner) findViewById(R.id.spinnerEnfant2);
         spinneractivite = (Spinner) findViewById(R.id.spinnerActivites2);
-        List<Object> listenfant = new ArrayList<>();
-        Enumeration e1 = htenfant.elements();
         boutonRetour = (Button) findViewById(R.id.boutonRetour2);
 
         addListenerOnSpinnerEnfant();
         addListenerOnSpinnerActivite();
         addListenerOnButton2();
 
-        while (e1.hasMoreElements())
-        {
-            listenfant.add(e1.nextElement());
-        }
+        List<Object> listEnfant = new ArrayList<>();
 
-        ArrayAdapter<Object> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listenfant);
+        for (Enfant enfant : Constants.enfant)
+            listEnfant.add(enfant.getEnfant());
+
+        ArrayAdapter<Object> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerenfant.setAdapter(adapter);
     }
@@ -54,21 +51,17 @@ public class StatusInscriptions extends Activity {
         spinnerenfant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    htactivite = Methods.JSONToHashtable(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscriptions_PHP), "inscriptions", "idactivite", "idenfant", String.valueOf(spinnerenfant.getSelectedItem())), "id", "activite");
-                    List<Object> listactivite = new ArrayList<>();
-                    listactivite.clear();
-                    Enumeration e2 = htactivite.elements();
+                //List<Object> activite = Methods.JSONToList(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscriptions_PHP), "inscriptions", "idactivite", "idenfant", String.valueOf(spinnerenfant.getSelectedItem())), "id", "activite");
+                //activite.clear();
 
-                    while (e2.hasMoreElements()) {
-                        listactivite.add(e2.nextElement());
-                    }
-                    ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listactivite);
+                List<Object> listActivite = new ArrayList<>();
+                for (Activite activite : Constants.activites)
+                    listActivite.add(activite.getActivite());
+
+
+                ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listActivite);
                     adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinneractivite.setAdapter(adapter2);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
@@ -99,7 +92,8 @@ public class StatusInscriptions extends Activity {
                     }
                     else
                     {
-                        textStatus.setVisibility(View.INVISIBLE);
+                        textStatus.setVisibility(View.VISIBLE);
+                        textStatus.setText(R.string.pasinscription);
                     }
                 }catch(IOException e)
                 {
