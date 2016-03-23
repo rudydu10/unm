@@ -141,7 +141,7 @@ public class Methods {
     {
         try {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.login_PHP), "login", "password", "username", username + ":" + password).replace("\t", "").replace("\r", "").replace("\n", "").replace("\f", "");
-            String passwd = "";
+            String passwd = response;
             if (response.length() >= 33) {
                 passwd = response.substring(0, 32);
                 Constants.idParent = response.substring(32);
