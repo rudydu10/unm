@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
                     startActivity(MainActivite);
                     finish();
                 } else if (login.contains(Constants.CODE_ERROR_LOGIN)) {
-                    Toast.makeText(LoginActivity.this, "", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.badusername), Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_ERROR_DROIT_CONNECTION)) {
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.badusername), Toast.LENGTH_LONG).show();
                 } else if (login.contains(Constants.CODE_MISSING)) {
