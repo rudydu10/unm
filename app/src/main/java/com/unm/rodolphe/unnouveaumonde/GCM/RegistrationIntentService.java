@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.com.unm.rodolphe.unnouveaumonde.GCM;
+package com.unm.rodolphe.unnouveaumonde.GCM;
 
 
 import android.app.IntentService;
