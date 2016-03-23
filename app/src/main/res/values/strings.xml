@@ -33,7 +33,7 @@
     <string name="mainmenu">Menu Principal</string>
     <string name="state">Etat :</string>
     <string name="pasinscription">Aucune inscription enregistrée.</string>
-    <string name="droitconnection">Erreur, vous n\'avez pas le droit de vous connecter. Veuillez contacter l'association.  </string>
+    <string name="droitconnection">Erreur, vous n\'avez pas le droit de vous connecter. Veuillez contacter l\'association.  </string>
 
     <!-- Strings related to Settings -->
 
