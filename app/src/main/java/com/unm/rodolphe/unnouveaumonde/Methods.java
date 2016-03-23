@@ -1,5 +1,7 @@
 package com.unm.rodolphe.unnouveaumonde;
 
+import com.unm.rodolphe.unnouveaumonde.JSON.JSONToActivite;
+import com.unm.rodolphe.unnouveaumonde.JSON.JSONToEnfant;
 import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
 import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
 

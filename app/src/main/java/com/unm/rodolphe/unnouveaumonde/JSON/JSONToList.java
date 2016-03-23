@@ -1,8 +1,6 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.rodolphe.unnouveaumonde.JSON;
 
 import android.os.AsyncTask;
-
-import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,19 +9,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONToActivite extends AsyncTask<String, Void, List<Activite>> {
+public class JSONToList extends AsyncTask<String, Void, List<Object>> {
 
     @Override
-    protected List<Activite> doInBackground(String... strings) {
-        List<Activite> list = new ArrayList<>();
+    protected List<Object> doInBackground(String... strings) {
+        List<Object> list = new ArrayList<>();
+
         String string = strings[0];
+        String getint = strings[1];
+        String getstring = strings[2];
+
         try {
 
             JSONArray jArray = new JSONArray(string);
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject json_data = jArray.getJSONObject(i);
                 System.out.println(i);
-                list.add(new Activite(json_data.getInt("id"), json_data.getString("activite")));
+                list.add(json_data.getInt(getint), json_data.getString(getstring));
             }
 
         } catch (JSONException e) {
