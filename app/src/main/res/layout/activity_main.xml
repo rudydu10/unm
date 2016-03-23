@@ -24,7 +24,8 @@
         android:layout_above="@+id/bouton1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo" />
+        android:src="@drawable/logo"
+        android:contentDescription="@string/logo" />
 
     <Button
         android:id="@+id/boutonStatus"
