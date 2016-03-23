@@ -53,7 +53,7 @@ public class Main extends AppCompatActivity {
                 startService(intent);
             }
 
-        if (preferences.getString("USERNAME", "")=="" || preferences.getString("PASSWORD", "")==""){
+        if (preferences.getString("USERNAME", "").contentEquals("") || preferences.getString("PASSWORD", "").contentEquals("")) {
             Intent loginActivite = new Intent(Main.this, LoginActivity.class);
             startActivity(loginActivite);
             finish();
