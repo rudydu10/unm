@@ -53,7 +53,12 @@ public class Main extends AppCompatActivity {
                 startService(intent);
             }
 
-        if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
+        if (preferences.getString("USERNAME", "")=="" || preferences.getString("PASSWORD", "")==""){
+            Intent loginActivite = new Intent(Main.this, LoginActivity.class);
+            startActivity(loginActivite);
+            finish();
+        }
+        else if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
             Constants.idParent = preferences.getString("ID", "0");
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
@@ -63,11 +68,12 @@ public class Main extends AppCompatActivity {
                 }
                 Constants.premiereConnection = false;
             }
-        } else {
-            Intent loginActivite = new Intent(Main.this, LoginActivity.class);
-            startActivity(loginActivite);
-            finish();
         }
+//        else {
+//            Intent loginActivite = new Intent(Main.this, LoginActivity.class);
+//            startActivity(loginActivite);
+//            finish();
+//        }
 
         setContentView(R.layout.activity_main);
 
