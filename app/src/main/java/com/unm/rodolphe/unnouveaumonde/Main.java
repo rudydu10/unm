@@ -62,19 +62,11 @@ public class Main extends AppCompatActivity {
             Constants.idParent = preferences.getString("ID", "0");
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
-                if (!Constants.idParent.equals("0")) {
                     Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
                     Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
-                }
                 Constants.premiereConnection = false;
             }
         }
-//        else {
-//            Intent loginActivite = new Intent(Main.this, LoginActivity.class);
-//            startActivity(loginActivite);
-//            finish();
-//        }
-
         setContentView(R.layout.activity_main);
 
         bouton1 = (Button) findViewById(R.id.bouton1);
