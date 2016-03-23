@@ -125,22 +125,6 @@ public class Methods {
 
     }
 
-    public static String getParentId(String username)
-    {
-        try
-        {
-            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.parent_PHP), "parent", "id", "username", username);
-            if (response.equals(Constants.CODE_ERROR_SENPOST_NULL)) {
-                return "nope";
-            }
-            return response;
-        }catch(IOException e)
-        {
-            e.printStackTrace();
-            return "nope";
-        }
-    }
-
     public static String getParentFirstName(String id)
     {
         try
@@ -157,8 +141,11 @@ public class Methods {
     {
         try {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.login_PHP), "login", "password", "username", username + ":" + password).replace("\t", "").replace("\r", "").replace("\n", "").replace("\f", "");
-            String passwd = response.substring(0, 32);
-            Constants.idParent = response.substring(32);
+            String passwd = "";
+            if (response.length() >= 33) {
+                passwd = response.substring(0, 32);
+                Constants.idParent = response.substring(32);
+            }
 
             if (passwd.contains(encodeMD5(password)))
             {
