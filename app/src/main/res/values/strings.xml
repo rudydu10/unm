@@ -99,4 +99,6 @@
     <string name="title_activity_compte_settings">CompteSettings</string>
     <string name="title_activity_programme">Programme</string>
     <string name="logo">logo</string>
+    <string name="dateDebut">Date début</string>
+    <string name="dateFin">Date fin</string>
 </resources>
