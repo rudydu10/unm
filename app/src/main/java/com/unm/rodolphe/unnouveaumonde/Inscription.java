@@ -1,6 +1,8 @@
 package com.unm.rodolphe.unnouveaumonde;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,11 +47,11 @@ public class Inscription extends Activity {
         for (Activite activite : Constants.activites)
             listActivite.add(activite.getActivite());
 
-        ArrayAdapter<Object> adapterEnfant = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
+        ArrayAdapter<Object> adapterEnfant = new ArrayAdapter<>(this, R.layout.listviewinscription, listEnfant);
         adapterEnfant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
-        ArrayAdapter<Object> adapterActivite = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listActivite);
+        ArrayAdapter<Object> adapterActivite = new ArrayAdapter<>(this, R.layout.listviewinscription, listActivite);
         adapterActivite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
@@ -165,6 +167,9 @@ public class Inscription extends Activity {
     private void addListenerOnActivite()
     {
         texteDescription = (TextView) findViewById(R.id.texteDescription);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        texteDescription.setTextSize(22);
+        texteDescription.setHeight(50);
         listA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -176,6 +181,17 @@ public class Inscription extends Activity {
 
                     //TODO integrer DateD et DateF sur le layout
                 texteDescription.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(listA.getItemAtPosition(position))));
+
+                    alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    alertDialogBuilder.setMessage(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(listA.getItemAtPosition(position))))
+                            .setTitle("Description :");
+
+                    alertDialogBuilder.create();
+                    alertDialogBuilder.show();
+
                     String DateD = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datedebut", "activite", String.valueOf(listA.getItemAtPosition(position)));
                     String DateF = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datefin", "activite", String.valueOf(listA.getItemAtPosition(position)));
                     System.out.println("Depart : " + DateD + " Fin : " + DateF);
