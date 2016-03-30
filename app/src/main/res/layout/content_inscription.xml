@@ -37,7 +37,7 @@
     <!--android:layout_toStartOf="@+id/textView2"-->
 
     <LinearLayout
-        android:id="@+id/layout"
+        android:id="@+id/layout1"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,21 +71,50 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_below="@id/layout"
+        android:layout_below="@id/layout1"
         android:background="@drawable/roundcorner"
         android:text="@string/mainmenu" />
 
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/texteDescription"
+        android:layout_centerHorizontal="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateDebut"
+            android:id="@+id/dateDebutText" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/dateDebut"
+            android:layout_above="@+id/texteDescription"
+            android:layout_toRightOf="@+id/dateDebutText" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/textView2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:text="" />-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateFin"
+            android:id="@+id/dateFinText"
+            android:layout_above="@+id/texteDescription"
+            android:layout_toRightOf="@+id/dateDebut" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/dateFin"
+            android:layout_above="@+id/texteDescription"
+            android:layout_toRightOf="@+id/dateFinText" />
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>
