@@ -166,10 +166,7 @@ public class Inscription extends Activity {
 
     private void addListenerOnActivite()
     {
-        texteDescription = (TextView) findViewById(R.id.texteDescription);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        texteDescription.setTextSize(22);
-        texteDescription.setHeight(50);
         listA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -180,7 +177,6 @@ public class Inscription extends Activity {
                 try {
 
                     //TODO integrer DateD et DateF sur le layout
-                texteDescription.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(listA.getItemAtPosition(position))));
 
                     alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
