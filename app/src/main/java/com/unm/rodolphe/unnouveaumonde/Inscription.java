@@ -26,10 +26,16 @@ public class Inscription extends Activity {
     ListView listA;
     String idActivite = "0";
     String idEnfant = "0";
-    TextView texteDescription;
     Button buttonSubmit;
     Button boutonRetour;
     Button buttonCancel;
+    Button buttonDescription;
+    TextView datedebut;
+    TextView datefin;
+    TextView datedebuttext;
+    TextView datefintext;
+
+    String listAselectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +44,20 @@ public class Inscription extends Activity {
         boutonRetour = (Button) findViewById(R.id.boutonRetour1);
         buttonCancel = (Button) findViewById(R.id.boutonAnnuler);
         buttonSubmit = (Button) findViewById(R.id.buttonValideInscription);
+        buttonDescription = (Button) findViewById(R.id.buttonDescription);
+
+        datedebut = (TextView) findViewById(R.id.dateDebut);
+        datefin = (TextView) findViewById(R.id.dateFin);
+        datedebuttext = (TextView) findViewById(R.id.dateDebutText);
+        datefintext = (TextView) findViewById(R.id.dateFinText);
+
         List<Object> listEnfant = new ArrayList<>();
         List<Object> listActivite = new ArrayList<>();
+
+        datedebuttext.setVisibility(View.INVISIBLE);
+        datefintext.setVisibility(View.INVISIBLE);
+        datedebut.setVisibility(View.INVISIBLE);
+        datefin.setVisibility(View.INVISIBLE);
 
         for (Enfant enfant : Constants.enfant)
             listEnfant.add(enfant.getEnfant());
@@ -50,10 +68,8 @@ public class Inscription extends Activity {
         ArrayAdapter<Object> adapterEnfant = new ArrayAdapter<>(this, R.layout.listviewinscription, listEnfant);
         adapterEnfant.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
         ArrayAdapter<Object> adapterActivite = new ArrayAdapter<>(this, R.layout.listviewinscription, listActivite);
         adapterActivite.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
 
         listE = (ListView)findViewById(R.id.ListEnfant);
         listE.setAdapter(adapterEnfant);
@@ -77,6 +93,9 @@ public class Inscription extends Activity {
 
         //Bouton Annuler
         addListenerOnButton3();
+
+        //Bouton Description
+        addListenerOnButton4();
     }
 
     //Bouton Valider
@@ -88,7 +107,6 @@ public class Inscription extends Activity {
             public void onClick(View v) {
 
                 try {
-
 
                     if (idEnfant.length() > 0 && idActivite.length() > 0) {
 
@@ -139,16 +157,42 @@ public class Inscription extends Activity {
 
                 buttonSubmit.setEnabled(false);
                 buttonCancel.setEnabled(false);
+                buttonDescription.setEnabled(false);
                 listA.setVisibility(View.GONE);
                 listE.setVisibility(View.VISIBLE);
-                texteDescription.setText("");
+
+                listAselectedItem = "";
+
+                datedebut.setText("");
+                datedebut.setVisibility(View.INVISIBLE);
+                datefin.setVisibility(View.INVISIBLE);
+                datefin.setText("");
+            }
+        });
+    }
+
+    //Bouton Description
+    private void addListenerOnButton4() {
+        buttonDescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    new AlertDialog.Builder(Inscription.this).setMessage(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", listAselectedItem))
+                            .setTitle("Description :").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).create().show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
     private void addListenerOnEnfant()
     {
-        texteDescription = (TextView) findViewById(R.id.texteDescription);
         listE.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -166,7 +210,6 @@ public class Inscription extends Activity {
 
     private void addListenerOnActivite()
     {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         listA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -175,22 +218,14 @@ public class Inscription extends Activity {
                     if (listA.getItemAtPosition(position).equals(activite.getActivite()))
                         idActivite = String.valueOf(activite.getId());
                 try {
-
-                    //TODO integrer DateD et DateF sur le layout
-
-                    alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
-                    alertDialogBuilder.setMessage(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "description", "activite", String.valueOf(listA.getItemAtPosition(position))))
-                            .setTitle("Description :");
-
-                    alertDialogBuilder.create();
-                    alertDialogBuilder.show();
-
-                    String DateD = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datedebut", "activite", String.valueOf(listA.getItemAtPosition(position)));
-                    String DateF = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datefin", "activite", String.valueOf(listA.getItemAtPosition(position)));
-                    System.out.println("Depart : " + DateD + " Fin : " + DateF);
+                    listAselectedItem = listA.getItemAtPosition(position).toString();
+                    buttonDescription.setEnabled(true);
+                    datedebut.setVisibility(View.VISIBLE);
+                    datedebuttext.setVisibility(View.VISIBLE);
+                    datefin.setVisibility(View.VISIBLE);
+                    datefintext.setVisibility(View.VISIBLE);
+                    datedebut.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datedebut", "activite", String.valueOf(listA.getItemAtPosition(position))).replaceAll("\t", ""));
+                    datefin.setText(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "datefin", "activite", String.valueOf(listA.getItemAtPosition(position))).replaceAll("\t", ""));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -101,4 +101,5 @@
     <string name="logo">logo</string>
     <string name="dateDebut">Date début</string>
     <string name="dateFin">Date fin</string>
+    <string name="boutonDescription">Description</string>
 </resources>
