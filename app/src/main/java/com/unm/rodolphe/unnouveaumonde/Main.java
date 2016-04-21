@@ -53,15 +53,17 @@ public class Main extends AppCompatActivity {
                 startService(intent);
             }
 
-            //Si l'utitilisateur n'est pas enregistrer, démarrer l'activité Login
+            //Si les données de connection stockée sont vide, démarrer l'activité Login
         if (preferences.getString("USERNAME", "").contentEquals("") || preferences.getString("PASSWORD", "").contentEquals("")) {
             Intent loginActivite = new Intent(Main.this, LoginActivity.class);
             startActivity(loginActivite);
             finish();
         }
-            // Sinon si
+            // Sinon si le login réussi on stocke l'id Parent dans Constants.java
         else if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
             Constants.idParent = preferences.getString("ID", "0");
+
+            //On verifie si c'est la première fois que l'utilisateur arrive sur Main.java depuis le lancement de l'application afin de lui dire bonjour
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
                     Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
@@ -76,6 +78,7 @@ public class Main extends AppCompatActivity {
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
 
+        //Vérifier si les tableaux d'enfant et d'activités ne sont pas vide et bloquer les boutons les utilisants le cas échéant
         if (Constants.enfant.isEmpty() || Constants.activites.isEmpty()) {
             bouton1.setEnabled(false);
             boutonStatus.setEnabled(false);
@@ -139,6 +142,9 @@ public class Main extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        //Création du menu de préférence pour la déconnection
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         switch (item.getItemId()) {
@@ -157,9 +163,9 @@ public class Main extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Vérifier si notre utilisateur a l'application Google Play Service
-     */
+
+     //Vérifier si notre utilisateur a l'application Google Play Service
+
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {

@@ -16,16 +16,25 @@ import java.util.concurrent.TimeUnit;
 
 public class Methods {
 
-    public static String sendPOST(URL obj, String variable, String select, String where, String like) throws IOException
+    /**
+     * Méthodes permettant l'envoi de requêtes POST
+     * @param obj URL du script où envoyer la requête
+     * @param variable nom de la variable POST
+     * @param param1 paramètre 1 (Select)
+     * @param param2 paramètre 2 (Where)
+     * @param param3 paramètre 3 (Like)
+     * @return contenu de la page du script
+     */
+    public static String sendPOST(URL obj, String variable, String param1, String param2, String param3) throws IOException
     {
         if(isOnline()) {
             sendPost sendpost = new sendPost();
             String[] params = new String[5];
             params[0] = obj.toString();
             params[1] = variable;
-            params[2] = select;
-            params[3] = where;
-            params[4] = like;
+            params[2] = param1;
+            params[3] = param2;
+            params[4] = param3;
             sendpost.execute(params);
             try {
                 String response = sendpost.get(10, TimeUnit.SECONDS);
@@ -44,6 +53,11 @@ public class Methods {
         }
     }
 
+    /**
+     * Méthodes permettant le cryptage en MD5
+     * @param password Mot de passe
+     * @return Mot de passe encrypté
+     */
     public static String encodeMD5(String password)
     {
         byte[] uniqueKey = password.getBytes();
@@ -76,6 +90,11 @@ public class Methods {
         return hashString.toString();
     }
 
+    /**
+     * Méthodes permettant la convertion des tableaux JSON enfants en liste d'Enfants
+     * @param string tableau JSON
+     * @return Liste d'enfants
+     */
     public static List<Enfant> JSONToEnfant(String string)
     {
         List<Enfant> response = new ArrayList<>();
@@ -91,6 +110,11 @@ public class Methods {
         return response;
     }
 
+    /**
+     * Méthodes permettant la convertion des tableaux JSON activités en liste d'Activites
+     * @param string tableau JSON
+     * @return Liste d'activité
+     */
     public static List<Activite> JSONToActivite(String string) {
         List<Activite> response = new ArrayList<>();
         JSONToActivite jsonToActivite = new JSONToActivite();
@@ -105,6 +129,11 @@ public class Methods {
         return response;
     }
 
+    /**
+     * Méthodes permettant la récupération des enfants d'un parent
+     * @param idparent id du parent
+     * @return Tableau JSON des enfants du parent avec leurs id
+     */
     public static String getEnfants(String idparent) {
         try {
             return sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id,enfant", "idparent", idparent);
@@ -115,6 +144,10 @@ public class Methods {
 
     }
 
+    /**
+     * Méthodes permettant la récupération des activités
+     * @return Tableau JSON des activités non terminées dont il reste des places libre
+     */
     public static String getAllActivites() {
         try {
             return sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
@@ -125,6 +158,11 @@ public class Methods {
 
     }
 
+    /**
+     * Méthodes permettant la recuperation du prénom d'un parent
+     * @param id id du Parent
+     * @return Prénom du Parent
+     */
     public static String getParentFirstName(String id)
     {
         try
@@ -139,9 +177,9 @@ public class Methods {
 
     /**
      * Méthodes permettant la connexion au serveur
-     * @param username
-     * @param password
-     * @return
+     * @param username nom d'utilisateur
+     * @param password mot de passe
+     * @return Code d'erreur
      */
     public static String login(String username, String password)
     {
@@ -176,6 +214,10 @@ public class Methods {
         }
     }
 
+    /**
+     * Méthodes permettant la verification de la connection
+     * @return Booléen de témoin de connection
+     */
     public static boolean isOnline() {
 
         Runtime runtime = Runtime.getRuntime();
