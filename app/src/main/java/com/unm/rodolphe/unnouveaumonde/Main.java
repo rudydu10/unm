@@ -53,11 +53,13 @@ public class Main extends AppCompatActivity {
                 startService(intent);
             }
 
+            //Si l'utitilisateur n'est pas enregistrer, démarrer l'activité Login
         if (preferences.getString("USERNAME", "").contentEquals("") || preferences.getString("PASSWORD", "").contentEquals("")) {
             Intent loginActivite = new Intent(Main.this, LoginActivity.class);
             startActivity(loginActivite);
             finish();
         }
+            // Sinon si
         else if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
             Constants.idParent = preferences.getString("ID", "0");
             if (Constants.premiereConnection) {

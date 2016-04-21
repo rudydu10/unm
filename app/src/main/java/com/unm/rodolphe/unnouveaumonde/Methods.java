@@ -137,6 +137,12 @@ public class Methods {
         }
     }
 
+    /**
+     * Méthodes permettant la connexion au serveur
+     * @param username
+     * @param password
+     * @return
+     */
     public static String login(String username, String password)
     {
         try {
