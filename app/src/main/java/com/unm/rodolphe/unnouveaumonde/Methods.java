@@ -2,8 +2,10 @@ package com.unm.rodolphe.unnouveaumonde;
 
 import com.unm.rodolphe.unnouveaumonde.JSON.JSONToActivite;
 import com.unm.rodolphe.unnouveaumonde.JSON.JSONToEnfant;
+import com.unm.rodolphe.unnouveaumonde.JSON.JSONToTarif;
 import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
 import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
+import com.unm.rodolphe.unnouveaumonde.Objects.Tarif;
 
 import java.io.IOException;
 import java.net.URL;
@@ -111,6 +113,26 @@ public class Methods {
     }
 
     /**
+     * Méthodes permettant la convertion des tableaux JSON Tarif en objet Tarif
+     *
+     * @param string tableau JSON
+     * @return objet Tarif
+     */
+    public static Tarif JSONToTarif(String string) {
+        Tarif tarif = new Tarif(0, 0, 0, 0, 0);
+        JSONToTarif jsonToTarif = new JSONToTarif();
+        String[] params = new String[1];
+        params[0] = string;
+        jsonToTarif.execute(params);
+        try {
+            tarif = jsonToTarif.get(10, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tarif;
+    }
+
+    /**
      * Méthodes permettant la convertion des tableaux JSON activités en liste d'Activites
      * @param string tableau JSON
      * @return Liste d'activité
@@ -118,7 +140,7 @@ public class Methods {
     public static List<Activite> JSONToActivite(String string) {
         List<Activite> response = new ArrayList<>();
         JSONToActivite jsonToActivite = new JSONToActivite();
-        String[] params = new String[3];
+        String[] params = new String[1];
         params[0] = string;
         jsonToActivite.execute(params);
         try {
@@ -232,6 +254,25 @@ public class Methods {
         }
 
         return false;
+    }
+
+    /**
+     * Méthode servant à récupérer un Objet tarif contenant tout les tarifs en fonction du coefficiant CAF du parent
+     *
+     * @param idparent id du Parent
+     * @return Objet Tarif contenant les tarifs correspondants au coefficiant CAF du parent
+     */
+
+    public static Tarif getTarifs(String idparent) {
+        String response;
+        Tarif tarif = new Tarif(0, 0, 0, 0, 0);
+        try {
+            tarif = JSONToTarif(sendPOST(new URL(Constants.server_ADDRESS + Constants.coeff_PHP), "id", Constants.idParent, "", ""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return tarif;
     }
 
 }

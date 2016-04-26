@@ -68,6 +68,8 @@ public class Main extends AppCompatActivity {
                 Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
                     Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
                     Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
+                Constants.tarif = Methods.getTarifs(Constants.idParent);
+                System.out.println("Tarif : " + Constants.tarif.getJournee());
                 Constants.premiereConnection = false;
             }
         }

@@ -3,6 +3,7 @@ package com.unm.rodolphe.unnouveaumonde;
 
 import com.unm.rodolphe.unnouveaumonde.Objects.Activite;
 import com.unm.rodolphe.unnouveaumonde.Objects.Enfant;
+import com.unm.rodolphe.unnouveaumonde.Objects.Tarif;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Constants {
     public static final String login_PHP = "login.php";
     public static final String inscriptions_PHP = "inscriptions.php";
     public static final String register_PHP = "register.php";
+    public static final String coeff_PHP = "coeff.php";
 
     //CODES D'ERREUR
     public static final String CODE_ERROR = "42";
@@ -41,4 +43,5 @@ public class Constants {
     public static List<Activite> activites = new ArrayList<>();
     public static Boolean premiereConnection = true;
     public static String idParent;
+    public static Tarif tarif;
 }
