@@ -114,6 +114,7 @@ public class Inscription extends Activity {
                             String response = Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscription_PHP), "inscription", "select", "where", idActivite + ":" + idEnfant);
                             if (response.contains(Constants.CODE_OK)) {
                                 Toast.makeText(Inscription.this, getResources().getString(R.string.signingok), Toast.LENGTH_LONG).show();
+                                Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
                                 finish();
                             } else if (response.contains(Constants.CODE_ERROR_DUAL_ENTRY)) {
                                 Toast.makeText(Inscription.this, getResources().getString(R.string.errorchildsigning), Toast.LENGTH_LONG).show();

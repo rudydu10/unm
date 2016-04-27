@@ -51,17 +51,23 @@ public class StatusInscriptions extends Activity {
         spinnerenfant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //List<Object> activite = Methods.JSONToList(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscriptions_PHP), "inscriptions", "idactivite", "idenfant", String.valueOf(spinnerenfant.getSelectedItem())), "id", "activite");
+                //List<Object> activite = Methods.JSONToActivite(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscriptions_PHP), "inscriptions", "idactivite", "idenfant", String.valueOf(spinnerenfant.getSelectedItem())), "id", "activite");
                 //activite.clear();
-
-                List<Object> listActivite = new ArrayList<>();
-                for (Activite activite : Constants.activites)
+                try{
+                    List<Object> listActivite = new ArrayList<>();
+                    for (Activite activite : Methods.JSONToActivite(Methods.sendPOST(new URL(Constants.server_ADDRESS + Constants.inscriptions_PHP), "inscriptions", "idactivite", "idenfant", String.valueOf(spinnerenfant.getSelectedItem()))))
                     listActivite.add(activite.getActivite());
 
 
-                ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listActivite);
+                    ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listActivite);
                     adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinneractivite.setAdapter(adapter2);
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
