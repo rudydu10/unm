@@ -54,4 +54,14 @@
         android:background="@drawable/roundcorner"
         android:text="@string/programme" />
 
+    <Button
+        android:id="@+id/boutonTarif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/boutonProgramme"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundcorner"
+        android:text="@string/Tarif" />
+
+
 </RelativeLayout>

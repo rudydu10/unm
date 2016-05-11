@@ -102,4 +102,13 @@
     <string name="dateDebut">Date début</string>
     <string name="dateFin">Date fin</string>
     <string name="boutonDescription">Description</string>
+    <string name="title_activity_tarif">TarifActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="Tarif">Tarif</string>
+    <string name="Journée">J</string>
+    <string name="JournéeR">J R</string>
+    <string name="DemiJournée">1/2 J</string>
+    <string name="DemiJournéeR">1/2 J R</string>
+    <string name="Semaine">S</string>
 </resources>

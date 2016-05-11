@@ -31,6 +31,7 @@ public class Main extends AppCompatActivity {
     Button boutonStatus;
     Button boutonSiteweb;
     Button boutonProgramme;
+    Button boutonTarif;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
 
@@ -69,7 +70,6 @@ public class Main extends AppCompatActivity {
                     Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
                     Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
                 Constants.tarif = Methods.getTarifs(Constants.idParent);
-                System.out.println("Tarif : " + Constants.tarif.getJournee());
                 Constants.premiereConnection = false;
             }
         }
@@ -79,6 +79,7 @@ public class Main extends AppCompatActivity {
         boutonStatus = (Button) findViewById(R.id.boutonStatus);
         boutonSiteweb = (Button) findViewById(R.id.boutonSiteweb);
         boutonProgramme = (Button) findViewById(R.id.boutonProgramme);
+        boutonTarif = (Button) findViewById(R.id.boutonTarif);
 
         //Vérifier si les tableaux d'enfant et d'activités ne sont pas vide et bloquer les boutons les utilisants le cas échéant
         if (Constants.enfant.isEmpty() || Constants.activites.isEmpty()) {
@@ -115,6 +116,14 @@ public class Main extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Programme = new Intent(Main.this, Programme.class);
                 startActivity(Programme);
+            }
+        });
+
+        boutonTarif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Tarif = new Intent(Main.this, TarifActivity.class);
+                startActivity(Tarif);
             }
         });
 

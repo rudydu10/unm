@@ -41,7 +41,7 @@ public class StatusInscriptions extends Activity {
             listEnfant.add(enfant.getEnfant());
 
         ArrayAdapter<Object> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listEnfant);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         spinnerenfant.setAdapter(adapter);
     }
 
@@ -60,7 +60,7 @@ public class StatusInscriptions extends Activity {
 
 
                     ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listActivite);
-                    adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
                     spinneractivite.setAdapter(adapter2);
                 }
                 catch(IOException e)
