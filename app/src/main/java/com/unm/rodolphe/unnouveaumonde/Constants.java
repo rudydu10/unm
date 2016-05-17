@@ -28,6 +28,7 @@ public class Constants {
     public static final String CODE_ERROR_DUAL_ENTRY = "202";
     public static final String CODE_ERROR_DROIT_CONNECTION = "204";
     public static final String CODE_ERROR_SENPOST_NULL = "205";
+    public static final String CODE_NO_ACTIVITY = "206";
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
@@ -36,12 +37,12 @@ public class Constants {
     public static final String server_ADDRESS = "http://www.un-nouveau-monde.fr/app/android/";
     public static final String webserver_ADDRESS = "http://www.un-nouveau-monde.fr/";
     public static final String programme_ADDRESS = "http://www.un-nouveau-monde.fr/app/android/programme/programme.html";
-
-
+    public static final int timeout = 5;
     //VARIABLES
     public static List<Enfant> enfant = new ArrayList<>();
     public static List<Activite> activites = new ArrayList<>();
+    public static boolean rp_srv_act = false;
     public static Boolean premiereConnection = true;
     public static String idParent;
-    public static Tarif tarif;
+    public static Tarif tarif = new Tarif(0, 0, 0, 0, 0);
 }

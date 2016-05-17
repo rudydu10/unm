@@ -105,7 +105,7 @@ public class Methods {
         params[0] = string;
         jsonToEnfant.execute(params);
         try {
-            response = jsonToEnfant.get(10, TimeUnit.SECONDS);
+            response = jsonToEnfant.get(Constants.timeout, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,7 +125,7 @@ public class Methods {
         params[0] = string;
         jsonToTarif.execute(params);
         try {
-            tarif = jsonToTarif.get(10, TimeUnit.SECONDS);
+            tarif = jsonToTarif.get(Constants.timeout, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,7 +144,7 @@ public class Methods {
         params[0] = string;
         jsonToActivite.execute(params);
         try {
-            response = jsonToActivite.get(10, TimeUnit.SECONDS);
+            response = jsonToActivite.get(Constants.timeout, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -172,7 +172,13 @@ public class Methods {
      */
     public static String getAllActivites() {
         try {
-            return sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
+            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
+            if (!response.replaceAll("\t", "").equals(Constants.CODE_NO_ACTIVITY))
+                return response;
+            else {
+                Constants.rp_srv_act = true;
+                return null;
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return null;

@@ -60,7 +60,7 @@ public class LoginActivity extends Activity {
                     editor.putString("PASSWORD", Password.getText().toString());
                     editor.putString("ID", Constants.idParent);
                     editor.apply();
-                    Intent MainActivite = new Intent(LoginActivity.this, Main.class);
+                    Intent MainActivite = new Intent(LoginActivity.this, SplashScreen.class);
                     startActivity(MainActivite);
                     finish();
                 } else if (login.contains(Constants.CODE_ERROR_LOGIN)) {

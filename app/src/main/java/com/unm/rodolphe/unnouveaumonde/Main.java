@@ -54,25 +54,13 @@ public class Main extends AppCompatActivity {
                 startService(intent);
             }
 
-            //Si les données de connection stockée sont vide, démarrer l'activité Login
-        if (preferences.getString("USERNAME", "").contentEquals("") || preferences.getString("PASSWORD", "").contentEquals("")) {
-            Intent loginActivite = new Intent(Main.this, LoginActivity.class);
-            startActivity(loginActivite);
-            finish();
-        }
-            // Sinon si le login réussi on stocke l'id Parent dans Constants.java
-        else if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
-            Constants.idParent = preferences.getString("ID", "0");
 
             //On verifie si c'est la première fois que l'utilisateur arrive sur Main.java depuis le lancement de l'application afin de lui dire bonjour
             if (Constants.premiereConnection) {
                 Toast.makeText(Main.this, getResources().getString(R.string.hello) + Methods.getParentFirstName(String.valueOf(Constants.idParent)), Toast.LENGTH_LONG).show();
-                    Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
-                    Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
-                Constants.tarif = Methods.getTarifs(Constants.idParent);
                 Constants.premiereConnection = false;
             }
-        }
+
         setContentView(R.layout.activity_main);
 
         bouton1 = (Button) findViewById(R.id.bouton1);

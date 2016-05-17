@@ -10,6 +10,7 @@
     <string name="title_activity_statusinscription">Status des Inscriptions</string>
     <string name="title_activity_status_inscription">Inscriptions</string>
     <string name="title_activity_status_inscriptions">Status des Inscriptions</string>
+    <string name="title_activity_SplashScreen">Chargement</string>
     <string name="notification">Notification Un Nouveau Monde</string>
     <string name="inscriptionvalide">Inscription validée</string>
     <string name="inscriptionattente">Inscription en attente</string>
@@ -34,6 +35,7 @@
     <string name="state">Etat :</string>
     <string name="pasinscription">Aucune inscription enregistrée.</string>
     <string name="droitconnection">Erreur, vous n\'avez pas le droit de vous connecter. Veuillez contacter l\'association.  </string>
+    <string name="waitforinit">Chargement en cours, veuillez patienter</string>
 
     <!-- Strings related to Settings -->
 
