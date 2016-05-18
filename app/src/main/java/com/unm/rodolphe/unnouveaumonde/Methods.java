@@ -173,8 +173,10 @@ public class Methods {
     public static String getAllActivites() {
         try {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
-            if (!response.replaceAll("\t", "").equals(Constants.CODE_NO_ACTIVITY))
+            if (!response.replaceAll("\t", "").equals(Constants.CODE_NO_DATA)) {
+                System.out.println("response" + response);
                 return response;
+            }
             else {
                 Constants.rp_srv_act = true;
                 return null;

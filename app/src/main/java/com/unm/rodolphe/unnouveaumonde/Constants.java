@@ -28,7 +28,7 @@ public class Constants {
     public static final String CODE_ERROR_DUAL_ENTRY = "202";
     public static final String CODE_ERROR_DROIT_CONNECTION = "204";
     public static final String CODE_ERROR_SENPOST_NULL = "205";
-    public static final String CODE_NO_ACTIVITY = "206";
+    public static final String CODE_NO_DATA = "206";
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
@@ -42,6 +42,7 @@ public class Constants {
     public static List<Enfant> enfant = new ArrayList<>();
     public static List<Activite> activites = new ArrayList<>();
     public static boolean rp_srv_act = false;
+    public static boolean rp_srv_enf = false;
     public static Boolean premiereConnection = true;
     public static String idParent;
     public static Tarif tarif = new Tarif(0, 0, 0, 0, 0);

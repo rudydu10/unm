@@ -59,8 +59,10 @@ public class SplashScreen extends Activity {
                                 progression += taille_max / 4;
                             }
 
-                        } else if (!enfant && nbenf < maxtry) {
-                            Constants.enfant = Methods.JSONToEnfant(Methods.getEnfants(Constants.idParent));
+                        } else if (!enfant && nbenf < maxtry && !Constants.rp_srv_enf) {
+                            String enf = Methods.getEnfants(Constants.idParent);
+                            if(!Constants.rp_srv_enf)
+                            Constants.enfant = Methods.JSONToEnfant(enf);
                             if (!Constants.enfant.isEmpty()) {
                                 progression += (int) Math.round(0.2 * taille_max);
                                 enfant = true;
@@ -113,7 +115,7 @@ public class SplashScreen extends Activity {
                         });
 
 
-                        Thread.sleep(100);
+                        Thread.sleep(200);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
