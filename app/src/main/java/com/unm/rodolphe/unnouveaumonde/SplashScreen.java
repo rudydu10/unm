@@ -16,7 +16,6 @@ public class SplashScreen extends Activity {
     private int taille_max = 100;
     private int progression, nbact, nbenf, nbtar = 0;
     private int maxtry = 3;
-    private int valueprog = 5;
     private Handler handler = new Handler();
 
     @Override
