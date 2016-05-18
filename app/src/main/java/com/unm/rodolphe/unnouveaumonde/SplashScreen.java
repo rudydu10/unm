@@ -68,6 +68,8 @@ public class SplashScreen extends Activity {
                                     progression += taille_max / 4;
                                 else
                                     progression += ((taille_max / 4) / maxtry) * (maxtry - nbenf);
+                                if (progression >= taille_max)
+                                    break;
                             } else {
                                 nbenf++;
                                 progression += (taille_max / 4) / maxtry;
@@ -84,6 +86,8 @@ public class SplashScreen extends Activity {
                                     progression += taille_max / 4;
                                 else
                                     progression += ((taille_max / 4) / maxtry) * (maxtry - nbact);
+                                if (progression >= taille_max)
+                                    break;
                             } else {
                                 nbact++;
                                 progression += (taille_max / 4) / maxtry;
@@ -98,6 +102,8 @@ public class SplashScreen extends Activity {
                                     progression += taille_max / 4;
                                 else
                                     progression += ((taille_max / 4) / maxtry) * (maxtry - nbtar);
+                                if (progression >= taille_max)
+                                    break;
                             } else {
                                 nbtar++;
                                 progression += (taille_max / 4) / maxtry;
@@ -111,8 +117,6 @@ public class SplashScreen extends Activity {
                                 progressBar.setProgress(progression);
                             }
                         });
-                        if (progression >= taille_max)
-                            break;
 
                         Thread.sleep(600);
                     }
