@@ -111,6 +111,8 @@ public class SplashScreen extends Activity {
                                 progressBar.setProgress(progression);
                             }
                         });
+                        if (progression >= taille_max)
+                            break;
 
                         Thread.sleep(600);
                     }
