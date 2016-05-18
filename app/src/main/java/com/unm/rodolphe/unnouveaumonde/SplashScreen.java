@@ -68,7 +68,9 @@ public class SplashScreen extends Activity {
                                 nbenf++;
                         } //todo finir d'empecher la répétition en cas d'absence d'activité mais de réponse du serveur
                         else if (!activite && nbact < maxtry && !Constants.rp_srv_act) {
-                            Constants.activites = Methods.JSONToActivite(Methods.getAllActivites());
+                            String activ = Methods.getAllActivites();
+                            if (!Constants.rp_srv_act)
+                                Constants.activites = Methods.JSONToActivite(activ);
                             if (!Constants.activites.isEmpty()) {
                                 progression += (int) Math.round(0.2 * taille_max);
                                 activite = true;
