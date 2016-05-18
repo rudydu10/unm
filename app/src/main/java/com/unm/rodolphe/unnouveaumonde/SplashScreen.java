@@ -68,8 +68,6 @@ public class SplashScreen extends Activity {
                                     progression += taille_max / 4;
                                 else
                                     progression += ((taille_max / 4) / maxtry) * (maxtry - nbenf);
-                                if (progression >= taille_max)
-                                    break;
                             } else {
                                 nbenf++;
                                 progression += (taille_max / 4) / maxtry;
@@ -86,8 +84,6 @@ public class SplashScreen extends Activity {
                                     progression += taille_max / 4;
                                 else
                                     progression += ((taille_max / 4) / maxtry) * (maxtry - nbact);
-                                if (progression >= taille_max)
-                                    break;
                             } else {
                                 nbact++;
                                 progression += (taille_max / 4) / maxtry;
@@ -102,8 +98,6 @@ public class SplashScreen extends Activity {
                                     progression += taille_max / 4;
                                 else
                                     progression += ((taille_max / 4) / maxtry) * (maxtry - nbtar);
-                                if (progression >= taille_max)
-                                    break;
                             } else {
                                 nbtar++;
                                 progression += (taille_max / 4) / maxtry;
@@ -118,7 +112,8 @@ public class SplashScreen extends Activity {
                             }
                         });
 
-                        Thread.sleep(600);
+
+                        Thread.sleep(300);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
