@@ -64,7 +64,10 @@ public class SplashScreen extends Activity {
                             if (!Constants.enfant.isEmpty()) {
                                 progression += (int) Math.round(0.2 * taille_max);
                                 enfant = true;
-                                progression += taille_max / 4;
+                                if (nbenf == 0)
+                                    progression += taille_max / 4;
+                                else
+                                    progression += ((taille_max / 4) / maxtry) * (maxtry - nbenf);
                             } else {
                                 nbenf++;
                                 progression += (taille_max / 4) / maxtry;
@@ -77,7 +80,10 @@ public class SplashScreen extends Activity {
                             if (!Constants.activites.isEmpty()) {
                                 progression += (int) Math.round(0.2 * taille_max);
                                 activite = true;
-                                progression += taille_max / 4;
+                                if (nbact == 0)
+                                    progression += taille_max / 4;
+                                else
+                                    progression += ((taille_max / 4) / maxtry) * (maxtry - nbact);
                             } else {
                                 nbact++;
                                 progression += (taille_max / 4) / maxtry;
@@ -88,7 +94,10 @@ public class SplashScreen extends Activity {
                             if (Constants.tarif.getJournee() > 0) {
                                 progression += (int) Math.round(0.1 * taille_max);
                                 tarif = true;
-                                progression += taille_max / 4;
+                                if (nbtar == 0)
+                                    progression += taille_max / 4;
+                                else
+                                    progression += ((taille_max / 4) / maxtry) * (maxtry - nbtar);
                             } else {
                                 nbtar++;
                                 progression += (taille_max / 4) / maxtry;
