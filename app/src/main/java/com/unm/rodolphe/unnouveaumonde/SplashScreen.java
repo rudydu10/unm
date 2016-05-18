@@ -40,8 +40,8 @@ public class SplashScreen extends Activity {
                 try {
                     while (progression < taille_max) {
 
-                        if (login && activite && enfant && tarif)
-                            progression = taille_max - valueprog;
+                        if (activite && enfant && tarif)
+                            progression = (taille_max / 4) * 3;
 
                         if (!login) {
 
@@ -57,6 +57,7 @@ public class SplashScreen extends Activity {
                                 Constants.idParent = preferences.getString("ID", "0");
                                 progression += (int) Math.round(0.2 * taille_max);
                                 login = true;
+                                progression += taille_max / 4;
                             }
 
                         } else if (!enfant && nbenf < maxtry) {
@@ -64,9 +65,12 @@ public class SplashScreen extends Activity {
                             if (!Constants.enfant.isEmpty()) {
                                 progression += (int) Math.round(0.2 * taille_max);
                                 enfant = true;
-                            } else
+                                progression += taille_max / 4;
+                            } else {
                                 nbenf++;
-                        } //todo finir d'empecher la répétition en cas d'absence d'activité mais de réponse du serveur
+                                progression += (taille_max / 4) / maxtry;
+                            }
+                        }
                         else if (!activite && nbact < maxtry && !Constants.rp_srv_act) {
                             String activ = Methods.getAllActivites();
                             if (!Constants.rp_srv_act)
@@ -74,20 +78,24 @@ public class SplashScreen extends Activity {
                             if (!Constants.activites.isEmpty()) {
                                 progression += (int) Math.round(0.2 * taille_max);
                                 activite = true;
-                            } else
+                                progression += taille_max / 4;
+                            } else {
                                 nbact++;
+                                progression += (taille_max / 4) / maxtry;
+                            }
 
                         } else if (!tarif && nbtar < maxtry) {
                             Constants.tarif = Methods.getTarifs(Constants.idParent);
                             if (Constants.tarif.getJournee() > 0) {
                                 progression += (int) Math.round(0.1 * taille_max);
                                 tarif = true;
-                            } else
+                                progression += taille_max / 4;
+                            } else {
                                 nbtar++;
+                                progression += (taille_max / 4) / maxtry;
+                            }
 
                         }
-
-                        progression += valueprog;
 
                         // Update de la barre
                         handler.post(new Runnable() {
