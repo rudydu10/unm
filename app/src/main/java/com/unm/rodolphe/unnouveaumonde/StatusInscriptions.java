@@ -1,7 +1,13 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,7 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatusInscriptions extends Activity {
+public class StatusInscriptions extends AppCompatActivity {
     Spinner spinnerenfant;
     Spinner spinneractivite;
 
@@ -121,5 +127,38 @@ public class StatusInscriptions extends Activity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //Création du menu de préférence pour la déconnection
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        switch (item.getItemId()) {
+            case R.id.deconnection:
+
+                final SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                Intent loginActivity = new Intent(StatusInscriptions.this, LoginActivity.class);
+                startActivity(loginActivity);
+                Constants.premiereConnection = true;
+                Main.getInstance().finish();
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

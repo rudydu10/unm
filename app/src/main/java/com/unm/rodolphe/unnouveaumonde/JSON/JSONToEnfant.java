@@ -24,7 +24,6 @@ public class JSONToEnfant extends AsyncTask<String, Void, List<Enfant>> {
             JSONArray jArray = new JSONArray(string);
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject json_data = jArray.getJSONObject(i);
-                System.out.println(i);
                 list.add(new Enfant(json_data.getInt("id"), json_data.getString("enfant")));
             }
 

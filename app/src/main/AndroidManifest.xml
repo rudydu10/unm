@@ -34,14 +34,12 @@
         <activity
             android:name=".StatusInscriptions"
             android:label="@string/title_activity_status_inscriptions"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Inscription"
             android:label="@string/title_activity_inscription"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Programme"

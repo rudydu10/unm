@@ -25,8 +25,7 @@ import com.unm.rodolphe.unnouveaumonde.GCM.RegistrationIntentService;
 public class Main extends AppCompatActivity {
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-
-
+    static Main main;
     Button bouton1;
     Button boutonStatus;
     Button boutonSiteweb;
@@ -34,11 +33,15 @@ public class Main extends AppCompatActivity {
     Button boutonTarif;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
+    public static Main getInstance() {
+        return main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        main = this;
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -139,6 +142,9 @@ public class Main extends AppCompatActivity {
         return true;
     }
 
+
+    //Vérifier si notre utilisateur a l'application Google Play Service
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -161,9 +167,6 @@ public class Main extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-     //Vérifier si notre utilisateur a l'application Google Play Service
 
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);

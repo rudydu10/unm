@@ -160,7 +160,6 @@ public class Methods {
         try {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id,enfant", "idparent", idparent);
             if (!response.replaceAll("\t", "").equals(Constants.CODE_NO_DATA)) {
-                System.out.println("response" + response);
                 return response;
             }
             else {
@@ -182,7 +181,6 @@ public class Methods {
         try {
             String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.activite_PHP), "activite", "id,activite", "activite", "%");
             if (!response.replaceAll("\t", "").equals(Constants.CODE_NO_DATA)) {
-                System.out.println("response" + response);
                 return response;
             }
             else {

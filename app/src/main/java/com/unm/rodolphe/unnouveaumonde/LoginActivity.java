@@ -54,7 +54,7 @@ public class LoginActivity extends Activity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String login = Methods.login(Username.getText().toString(), Password.getText().toString());
+                String login = Methods.login(Username.getText().toString().replaceAll(" ", ""), Password.getText().toString().replaceAll(" ", ""));
                 if (login.contains(Constants.CODE_OK)) {
                     editor.putString("USERNAME", Username.getText().toString());
                     editor.putString("PASSWORD", Password.getText().toString());

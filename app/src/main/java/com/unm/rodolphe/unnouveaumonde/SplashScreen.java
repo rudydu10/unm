@@ -44,8 +44,16 @@ public class SplashScreen extends Activity {
                 try {
                     while (progression < taille_max) {
 
-                        if (activite && enfant && tarif)
+                        if (activite && enfant && tarif) {
                             progression = (taille_max / 4) * 3;
+                            // Update de la barre
+                            handler.post(new Runnable() {
+                                public void run() {
+                                    progressBar.setProgress((int) Math.round(progression));
+                                    percent.setText(String.format("%1$d %%", (int) Math.round(progression)));
+                                }
+                            });
+                        }
 
                         if (!login) {
 

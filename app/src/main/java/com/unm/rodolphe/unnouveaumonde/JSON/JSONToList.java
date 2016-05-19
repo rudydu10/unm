@@ -24,7 +24,6 @@ public class JSONToList extends AsyncTask<String, Void, List<Object>> {
             JSONArray jArray = new JSONArray(string);
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject json_data = jArray.getJSONObject(i);
-                System.out.println(i);
                 list.add(json_data.getInt(getint), json_data.getString(getstring));
             }
 
