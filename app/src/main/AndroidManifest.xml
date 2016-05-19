@@ -45,7 +45,8 @@
             android:name=".Programme"
             android:label="@string/title_activity_programme"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".SplashScreen"
             android:label="@string/title_activity_SplashScreen"

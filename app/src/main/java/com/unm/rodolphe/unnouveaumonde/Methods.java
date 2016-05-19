@@ -278,10 +278,9 @@ public class Methods {
      */
 
     public static Tarif getTarifs(String idparent) {
-        String response;
         Tarif tarif = new Tarif(0, 0, 0, 0, 0);
         try {
-            tarif = JSONToTarif(sendPOST(new URL(Constants.server_ADDRESS + Constants.coeff_PHP), "id", Constants.idParent, "", ""));
+            tarif = JSONToTarif(sendPOST(new URL(Constants.server_ADDRESS + Constants.coeff_PHP), "id", idparent, "", ""));
         } catch (IOException e) {
             e.printStackTrace();
         }

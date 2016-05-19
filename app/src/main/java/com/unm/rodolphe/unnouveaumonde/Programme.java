@@ -15,9 +15,11 @@ public class Programme extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.programme);
+
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        webView = new WebView(this);
+        webView = (WebView) findViewById(R.id.webView);
 
 
         WebSettings webSettings = webView.getSettings();
