@@ -71,21 +71,21 @@
         </receiver>
 
         <service
-            android:name=".gcm1.MyGcmListenerService"
+            android:name=".gcm.MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name=".gcm1.MyInstanceIDListenerService"
+            android:name=".gcm.MyInstanceIDListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <service
-            android:name=".gcm1.RegistrationIntentService"
+            android:name=".gcm.RegistrationIntentService"
             android:exported="false" >
         </service>
 

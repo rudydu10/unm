@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.objects1;
+package com.unm.rodolphe.unnouveaumonde.objects;
 
 public class Activite {
 

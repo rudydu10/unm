@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.unm.rodolphe.unnouveaumonde.objects1.Activite;
-import com.unm.rodolphe.unnouveaumonde.objects1.Enfant;
+import com.unm.rodolphe.unnouveaumonde.objects.Activite;
+import com.unm.rodolphe.unnouveaumonde.objects.Enfant;
 
 import java.io.IOException;
 import java.net.URL;

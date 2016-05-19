@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.gcm1;
+package com.unm.rodolphe.unnouveaumonde.gcm;
 
 import android.app.Notification;
 import android.app.NotificationManager;
