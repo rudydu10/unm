@@ -158,7 +158,15 @@ public class Methods {
      */
     public static String getEnfants(String idparent) {
         try {
-            return sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id,enfant", "idparent", idparent);
+            String response = sendPOST(new URL(Constants.server_ADDRESS + Constants.enfant_PHP), "enfant", "id,enfant", "idparent", idparent);
+            if (!response.replaceAll("\t", "").equals(Constants.CODE_NO_DATA)) {
+                System.out.println("response" + response);
+                return response;
+            }
+            else {
+                Constants.rp_srv_enf = true;
+                return null;
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return null;
