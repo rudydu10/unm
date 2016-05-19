@@ -1,11 +1,11 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import com.unm.rodolphe.unnouveaumonde.json.JSONToActivite;
-import com.unm.rodolphe.unnouveaumonde.json.JSONToEnfant;
-import com.unm.rodolphe.unnouveaumonde.json.JSONToTarif;
-import com.unm.rodolphe.unnouveaumonde.objects.Activite;
-import com.unm.rodolphe.unnouveaumonde.objects.Enfant;
-import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
+import com.unm.rodolphe.unnouveaumonde.json1.JSONToActivite;
+import com.unm.rodolphe.unnouveaumonde.json1.JSONToEnfant;
+import com.unm.rodolphe.unnouveaumonde.json1.JSONToTarif;
+import com.unm.rodolphe.unnouveaumonde.objects1.Activite;
+import com.unm.rodolphe.unnouveaumonde.objects1.Enfant;
+import com.unm.rodolphe.unnouveaumonde.objects1.Tarif;
 
 import java.io.IOException;
 import java.net.URL;

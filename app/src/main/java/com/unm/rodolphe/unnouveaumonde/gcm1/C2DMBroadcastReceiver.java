@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.GCM;
+package com.unm.rodolphe.unnouveaumonde.gcm1;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,8 +7,11 @@ import android.content.Intent;
 public abstract class C2DMBroadcastReceiver extends BroadcastReceiver {
 
     protected abstract void onError(Context context, String error);
+
     protected abstract void onRegistration(Context context, String registrationId);
+
     protected abstract void onUnregistration(Context context);
+
     protected abstract void onMessageReceived(Context context, Intent intent);
 
     @Override

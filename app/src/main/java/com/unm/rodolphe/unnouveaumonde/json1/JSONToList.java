@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.JSON;
+package com.unm.rodolphe.unnouveaumonde.json1;
 
 import android.os.AsyncTask;
 

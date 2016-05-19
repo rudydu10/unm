@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.unm.rodolphe.unnouveaumonde.gcm.RegistrationIntentService;
+import com.unm.rodolphe.unnouveaumonde.gcm1.RegistrationIntentService;
 
 
 public class Main extends AppCompatActivity {

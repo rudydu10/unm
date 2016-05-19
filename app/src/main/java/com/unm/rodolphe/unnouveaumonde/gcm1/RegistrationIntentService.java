@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.GCM;
+package com.unm.rodolphe.unnouveaumonde.gcm1;
 
 
 import android.app.IntentService;
@@ -73,8 +73,8 @@ public class RegistrationIntentService extends IntentService {
                 if (!sharedPreferences.getBoolean(Constants.SENT_TOKEN_TO_SERVER, false))
                     sendRegistrationToServer(token);
 
-                    sharedPreferences.edit().putBoolean(Constants.SENT_TOKEN_TO_SERVER, true).apply();
-                    sharedPreferences.edit().putBoolean("serveurRegister", true).apply();
+                sharedPreferences.edit().putBoolean(Constants.SENT_TOKEN_TO_SERVER, true).apply();
+                sharedPreferences.edit().putBoolean("serveurRegister", true).apply();
 
             }
         } catch (Exception e) {

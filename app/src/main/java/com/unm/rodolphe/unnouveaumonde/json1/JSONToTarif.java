@@ -1,8 +1,8 @@
-package com.unm.rodolphe.unnouveaumonde.JSON;
+package com.unm.rodolphe.unnouveaumonde.json1;
 
 import android.os.AsyncTask;
 
-import com.unm.rodolphe.unnouveaumonde.Objects.Tarif;
+import com.unm.rodolphe.unnouveaumonde.objects1.Tarif;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.GCM;
+package com.unm.rodolphe.unnouveaumonde.gcm1;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -38,7 +38,7 @@ public class NotificationsReceiver extends C2DMBroadcastReceiver {
         Notification notification = new Notification.Builder(context)
                 .setContentTitle("Un Nouveau Monde")
                 .setContentText("Le nouveau programme est sortit !").setSmallIcon(R.drawable.notification)
-                .setContentIntent(contentIntent).setVibrate(new long[] {0,200,100,200,100,200}).build();
+                .setContentIntent(contentIntent).setVibrate(new long[]{0, 200, 100, 200, 100, 200}).build();
 
         // affichage de la notification dans le menu déroulant :
         notification.flags |= Notification.FLAG_AUTO_CANCEL; // la notification disparaitra une fois cliquée
