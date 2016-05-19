@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 public class SplashScreen extends Activity {
 
     ProgressBar progressBar;
+    TextView percent;
+
     boolean login, enfant, activite, tarif = false;
     private int taille_max = 100;
-    private int progression, nbact, nbenf, nbtar = 0;
+    private double progression = 0;
+    private int nbact, nbenf, nbtar = 0;
     private int maxtry = 3;
     private Handler handler = new Handler();
 
@@ -23,6 +27,7 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        percent = (TextView) findViewById(R.id.percent);
 
         if (Constants.tarif.getJournee() > 0)
             tarif = true;
@@ -45,64 +50,56 @@ public class SplashScreen extends Activity {
                         if (!login) {
 
                             //Si les données de connection stockée sont vide, démarrer l'activité Login
-                            if (preferences.getString("USERNAME", "").contentEquals("") || preferences.getString("PASSWORD", "").contentEquals("") || !Methods.isOnline()) {
+                            if (preferences.getString("USERNAME", "").contentEquals("") || preferences.getString("PASSWORD", "").contentEquals("") || !Methods.isOnline() || !Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
                                 Intent loginActivite = new Intent(SplashScreen.this, LoginActivity.class);
                                 startActivity(loginActivite);
                                 finish();
                                 break;
                             }
                             // Sinon si le login réussi on stocke l'id Parent dans Constants.java
-                            else if (Methods.login(preferences.getString("USERNAME", ""), preferences.getString("PASSWORD", "")).contains(Constants.CODE_OK)) {
+                            else {
                                 Constants.idParent = preferences.getString("ID", "0");
-                                progression += (int) Math.round(0.2 * taille_max);
                                 login = true;
-                                progression += taille_max / 4;
+                                progression = doProgress(progression, taille_max, maxtry, 0);
                             }
 
                         } else if (!enfant && nbenf < maxtry && !Constants.rp_srv_enf) {
                             String enf = Methods.getEnfants(Constants.idParent);
-                            if(!Constants.rp_srv_enf)
-                            Constants.enfant = Methods.JSONToEnfant(enf);
-                            if (!Constants.enfant.isEmpty()) {
-                                progression += (int) Math.round(0.2 * taille_max);
-                                enfant = true;
-                                if (nbenf == 0)
-                                    progression += taille_max / 4;
-                                else
-                                    progression += ((taille_max / 4) / maxtry) * (maxtry - nbenf);
-                            } else {
-                                nbenf++;
-                                progression += (taille_max / 4) / maxtry;
-                            }
+                            if (!Constants.rp_srv_enf) {
+                                Constants.enfant = Methods.JSONToEnfant(enf);
+                                if (!Constants.enfant.isEmpty()) {
+                                    enfant = true;
+                                    progression = doProgress(progression, taille_max, maxtry, 0);
+                                } else {
+                                    nbenf++;
+                                    progression = doProgress(progression, taille_max, maxtry, nbenf);
+                                }
+                            } else
+                                progression = doProgress(progression, taille_max, maxtry, nbenf);
                         }
                         else if (!activite && nbact < maxtry && !Constants.rp_srv_act) {
                             String activ = Methods.getAllActivites();
-                            if (!Constants.rp_srv_act)
+                            if (!Constants.rp_srv_act) {
                                 Constants.activites = Methods.JSONToActivite(activ);
-                            if (!Constants.activites.isEmpty()) {
-                                progression += (int) Math.round(0.2 * taille_max);
-                                activite = true;
-                                if (nbact == 0)
-                                    progression += taille_max / 4;
-                                else
-                                    progression += ((taille_max / 4) / maxtry) * (maxtry - nbact);
-                            } else {
-                                nbact++;
-                                progression += (taille_max / 4) / maxtry;
-                            }
+
+                                if (!Constants.activites.isEmpty()) {
+                                    activite = true;
+                                    progression = doProgress(progression, taille_max, maxtry, 0);
+                                } else {
+                                    nbact++;
+                                    progression = doProgress(progression, taille_max, maxtry, nbact);
+                                }
+                            } else
+                                progression = doProgress(progression, taille_max, maxtry, nbact);
 
                         } else if (!tarif && nbtar < maxtry) {
                             Constants.tarif = Methods.getTarifs(Constants.idParent);
                             if (Constants.tarif.getJournee() > 0) {
-                                progression += (int) Math.round(0.1 * taille_max);
                                 tarif = true;
-                                if (nbtar == 0)
-                                    progression += taille_max / 4;
-                                else
-                                    progression += ((taille_max / 4) / maxtry) * (maxtry - nbtar);
+                                progression = doProgress(progression, taille_max, maxtry, 0);
                             } else {
                                 nbtar++;
-                                progression += (taille_max / 4) / maxtry;
+                                progression = doProgress(progression, taille_max, maxtry, nbtar);
                             }
 
                         }
@@ -110,12 +107,13 @@ public class SplashScreen extends Activity {
                         // Update de la barre
                         handler.post(new Runnable() {
                             public void run() {
-                                progressBar.setProgress(progression);
+                                progressBar.setProgress((int) Math.round(progression));
+                                percent.setText(String.format("%1$d %%", (int) Math.round(progression)));
                             }
                         });
 
 
-                        Thread.sleep(200);
+                        Thread.sleep(100);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -133,6 +131,16 @@ public class SplashScreen extends Activity {
         });
 
         thread.start();
+    }
+
+    private double doProgress(double progression, int taillemax, int maxtry, int nb) {
+        double result;
+
+        if (nb != 0)
+            result = (taillemax / 4) / maxtry * nb + progression;
+        else
+            result = taillemax / 4 + progression;
+        return result;
     }
 
     @Override
