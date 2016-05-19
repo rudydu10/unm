@@ -15,28 +15,21 @@ public class Programme extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.programme);
 
-        getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
         webView = (WebView) findViewById(R.id.webView);
-
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setBuiltInZoomControls(true);
 
         webView.loadUrl(Constants.programme_ADDRESS);
-        webView.setWebViewClient(new WebViewClient()
-        {
+        webView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url)
-            {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
             }
         });
-
-        this.setContentView(webView);
-
     }
 }
