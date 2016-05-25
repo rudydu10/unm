@@ -59,6 +59,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".TarifActivity"
+            android:label="@string/title_activity_tarif" >
+        </activity>
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
@@ -89,10 +94,7 @@
             android:exported="false" >
         </service>
 
-        <activity
-            android:name=".TarifActivity"
-            android:label="@string/title_activity_tarif" >
-        </activity>
+
     </application>
 
 </manifest>
