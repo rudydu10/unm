@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.Objects;
+package com.unm.rodolphe.unnouveaumonde.objects;
 
 public class Enfant {
 
