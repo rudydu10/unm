@@ -1,16 +1,16 @@
 package com.unm.rodolphe.unnouveaumonde;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public class SplashScreen extends Activity {
+public class SplashScreen extends AppCompatActivity {
 
     ProgressBar progressBar;
     TextView percent;
@@ -29,6 +29,9 @@ public class SplashScreen extends Activity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         percent = (TextView) findViewById(R.id.percent);
 
+        Constants.rp_srv_enf = false;
+        Constants.rp_srv_act = false;
+
         if (Constants.tarif.getJournee() > 0)
             tarif = true;
         if (!Constants.activites.isEmpty())
@@ -42,18 +45,41 @@ public class SplashScreen extends Activity {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    while (progression < taille_max) {
 
-                        if (activite && enfant && tarif) {
-                            progression = (taille_max / 4) * 3;
-                            // Update de la barre
-                            handler.post(new Runnable() {
-                                public void run() {
-                                    progressBar.setProgress((int) Math.round(progression));
-                                    percent.setText(String.format("%1$d %%", (int) Math.round(progression)));
-                                }
-                            });
-                        }
+                    if (activite) {
+                        progression += (taille_max / 4);
+                        // Update de la barre
+                        handler.post(new Runnable() {
+                            public void run() {
+                                progressBar.setProgress((int) Math.round(progression));
+                                percent.setText(String.format("%1$d %%", (int) Math.round(progression)));
+                            }
+                        });
+                    }
+
+                    if (enfant) {
+                        progression += (taille_max / 4);
+                        // Update de la barre
+                        handler.post(new Runnable() {
+                            public void run() {
+                                progressBar.setProgress((int) Math.round(progression));
+                                percent.setText(String.format("%1$d %%", (int) Math.round(progression)));
+                            }
+                        });
+                    }
+
+                    if (tarif) {
+                        progression += (taille_max / 4);
+                        // Update de la barre
+                        handler.post(new Runnable() {
+                            public void run() {
+                                progressBar.setProgress((int) Math.round(progression));
+                                percent.setText(String.format("%1$d %%", (int) Math.round(progression)));
+                            }
+                        });
+                    }
+
+                    while (progression < taille_max) {
 
                         if (!login) {
 
@@ -66,7 +92,6 @@ public class SplashScreen extends Activity {
                             }
                             // Sinon si le login réussi on stocke l'id Parent dans Constants.java
                             else {
-                                Constants.idParent = preferences.getString("ID", "0");
                                 login = true;
                                 progression = doProgress(progression, taille_max, maxtry, 0);
                             }
@@ -78,14 +103,15 @@ public class SplashScreen extends Activity {
                                 if (!Constants.enfant.isEmpty()) {
                                     enfant = true;
                                     progression = doProgress(progression, taille_max, maxtry, 0);
+                                    System.out.println("Enfant ok ");
                                 } else {
                                     nbenf++;
                                     progression = doProgress(progression, taille_max, maxtry, nbenf);
+                                    System.out.println("Enfant pas ok : " + nbenf);
                                 }
                             } else
-                                progression = doProgress(progression, taille_max, maxtry, nbenf);
-                        }
-                        else if (!activite && nbact < maxtry && !Constants.rp_srv_act) {
+                                progression = doProgress(progression, taille_max, maxtry, 0);
+                        } else if (!activite && nbact < maxtry && !Constants.rp_srv_act) {
                             String activ = Methods.getAllActivites();
                             if (!Constants.rp_srv_act) {
                                 Constants.activites = Methods.JSONToActivite(activ);
@@ -93,21 +119,25 @@ public class SplashScreen extends Activity {
                                 if (!Constants.activites.isEmpty()) {
                                     activite = true;
                                     progression = doProgress(progression, taille_max, maxtry, 0);
+                                    System.out.println("Activite ok ");
                                 } else {
                                     nbact++;
                                     progression = doProgress(progression, taille_max, maxtry, nbact);
+                                    System.out.println("Activite pas ok : " + nbact);
                                 }
                             } else
-                                progression = doProgress(progression, taille_max, maxtry, nbact);
+                                progression = doProgress(progression, taille_max, maxtry, 0);
 
                         } else if (!tarif && nbtar < maxtry) {
                             Constants.tarif = Methods.getTarifs(Constants.idParent);
                             if (Constants.tarif.getJournee() > 0) {
                                 tarif = true;
                                 progression = doProgress(progression, taille_max, maxtry, 0);
+                                System.out.println("Tarif ok ");
                             } else {
                                 nbtar++;
-                                progression = doProgress(progression, taille_max, maxtry, nbtar);
+                                progression = doProgress(progression, taille_max, maxtry, 0);
+                                System.out.println("Tarif pas ok : " + nbtar);
                             }
 
                         }
@@ -149,10 +179,5 @@ public class SplashScreen extends Activity {
         else
             result = taillemax / 4 + progression;
         return result;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.unm.rodolphe.unnouveaumonde.objects.Activite;
 import com.unm.rodolphe.unnouveaumonde.objects.Enfant;
+import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
 
 import java.io.IOException;
 import java.net.URL;
@@ -151,6 +152,10 @@ public class StatusInscriptions extends AppCompatActivity {
                 final SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
+                Constants.premiereConnection = true;
+                Constants.enfant = new ArrayList<>();
+                Constants.tarif = new Tarif(0, 0, 0, 0, 0);
+                Constants.idParent = null;
                 Intent loginActivity = new Intent(StatusInscriptions.this, LoginActivity.class);
                 startActivity(loginActivity);
                 Constants.premiereConnection = true;

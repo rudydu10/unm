@@ -20,6 +20,9 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.unm.rodolphe.unnouveaumonde.gcm.RegistrationIntentService;
+import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
+
+import java.util.ArrayList;
 
 
 public class Main extends AppCompatActivity {
@@ -158,9 +161,12 @@ public class Main extends AppCompatActivity {
                 final SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
+                Constants.premiereConnection = true;
+                Constants.enfant = new ArrayList<>();
+                Constants.tarif = new Tarif(0, 0, 0, 0, 0);
+                Constants.idParent = null;
                 Intent loginActivity = new Intent(Main.this, LoginActivity.class);
                 startActivity(loginActivity);
-                Constants.premiereConnection = true;
                 finish();
                 return true;
         }
