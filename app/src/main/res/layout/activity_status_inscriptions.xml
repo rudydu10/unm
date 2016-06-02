@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:fitsSystemWindows="true"
-    tools:context="com.unm.unnouveaumonde.StatusInscriptions">
+    tools:context="com.unm.unnouveaumonde.StatutInscriptions">
 
     <include layout="@layout/content_status_inscriptions" />
 

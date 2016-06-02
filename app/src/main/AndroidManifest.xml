@@ -32,7 +32,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:name="com.unm.unnouveaumonde.StatusInscriptions"
+            android:name="com.unm.unnouveaumonde.StatutInscriptions"
             android:label="@string/title_activity_status_inscriptions"
             android:screenOrientation="portrait">
         </activity>

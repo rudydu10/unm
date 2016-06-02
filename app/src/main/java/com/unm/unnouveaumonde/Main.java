@@ -93,7 +93,7 @@ public class Main extends AppCompatActivity {
         boutonStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent StatusActivite = new Intent(Main.this, StatusInscriptions.class);
+                Intent StatusActivite = new Intent(Main.this, StatutInscriptions.class);
                 startActivity(StatusActivite);
             }
         });

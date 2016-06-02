@@ -1,5 +1,14 @@
 package com.unm.unnouveaumonde;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
+
+import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.json.JSONToActivite;
 import com.unm.unnouveaumonde.json.JSONToEnfant;
 import com.unm.unnouveaumonde.json.JSONToTarif;
@@ -13,6 +22,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
@@ -286,6 +296,34 @@ public class Methods {
         }
 
         return tarif;
+    }
+
+    /**
+     * @param context Contexte depuis lequel lancer la notification
+     * @param message Message à afficher dans la notification
+     * @param titre   Titre de la notification
+     */
+
+    public static void sendNotification(Context context, String message, String titre) {
+        Intent intent = new Intent(context, Main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(titre)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // On génère un nombre aléatoire pour pouvoir afficher plusieurs notifications
+        notificationManager.notify(new Random().nextInt(9999), notificationBuilder.build());
     }
 
 }

@@ -25,7 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatusInscriptions extends AppCompatActivity {
+public class StatutInscriptions extends AppCompatActivity {
     Spinner spinnerenfant;
     Spinner spinneractivite;
 
@@ -67,7 +67,7 @@ public class StatusInscriptions extends AppCompatActivity {
                     listActivite.add(activite.getActivite());
 
 
-                    ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatusInscriptions.this, android.R.layout.simple_spinner_item, listActivite);
+                    ArrayAdapter<Object> adapter2 = new ArrayAdapter<>(StatutInscriptions.this, android.R.layout.simple_spinner_item, listActivite);
                     adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
                     spinneractivite.setAdapter(adapter2);
                 }
@@ -157,7 +157,7 @@ public class StatusInscriptions extends AppCompatActivity {
                 Constants.enfant = new ArrayList<>();
                 Constants.tarif = new Tarif(0, 0, 0, 0, 0);
                 Constants.idParent = null;
-                Intent loginActivity = new Intent(StatusInscriptions.this, LoginActivity.class);
+                Intent loginActivity = new Intent(StatutInscriptions.this, LoginActivity.class);
                 startActivity(loginActivity);
                 Constants.premiereConnection = true;
                 Main.getInstance().finish();
