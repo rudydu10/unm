@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.unnouveaumonde;
 
 import android.net.Uri;
 import android.os.AsyncTask;

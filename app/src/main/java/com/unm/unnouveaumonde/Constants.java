@@ -1,9 +1,9 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.unnouveaumonde;
 
 
-import com.unm.rodolphe.unnouveaumonde.objects.Activite;
-import com.unm.rodolphe.unnouveaumonde.objects.Enfant;
-import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
+import com.unm.unnouveaumonde.objects.Activite;
+import com.unm.unnouveaumonde.objects.Enfant;
+import com.unm.unnouveaumonde.objects.Tarif;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.gcm;
+package com.unm.unnouveaumonde.gcm;
 
 
 import android.app.IntentService;
@@ -13,8 +13,8 @@ import com.google.android.gms.iid.InstanceID;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
-import com.unm.rodolphe.unnouveaumonde.Constants;
 import com.unm.rodolphe.unnouveaumonde.R;
+import com.unm.unnouveaumonde.Constants;
 
 import java.io.IOException;
 

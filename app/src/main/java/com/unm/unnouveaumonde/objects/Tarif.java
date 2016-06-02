@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.objects;
+package com.unm.unnouveaumonde.objects;
 
 public class Tarif {
 

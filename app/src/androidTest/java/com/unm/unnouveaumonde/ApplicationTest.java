@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.unnouveaumonde;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

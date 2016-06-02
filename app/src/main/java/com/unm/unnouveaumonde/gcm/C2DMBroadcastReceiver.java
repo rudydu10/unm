@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde.gcm;
+package com.unm.unnouveaumonde.gcm;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.unnouveaumonde;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,8 +19,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.unm.rodolphe.unnouveaumonde.gcm.RegistrationIntentService;
-import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
+import com.unm.rodolphe.unnouveaumonde.R;
+import com.unm.unnouveaumonde.gcm.RegistrationIntentService;
+import com.unm.unnouveaumonde.objects.Tarif;
 
 import java.util.ArrayList;
 

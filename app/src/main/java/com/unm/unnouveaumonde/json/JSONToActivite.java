@@ -1,8 +1,8 @@
-package com.unm.rodolphe.unnouveaumonde.json;
+package com.unm.unnouveaumonde.json;
 
 import android.os.AsyncTask;
 
-import com.unm.rodolphe.unnouveaumonde.objects.Activite;
+import com.unm.unnouveaumonde.objects.Activite;
 
 import org.json.JSONArray;
 import org.json.JSONException;

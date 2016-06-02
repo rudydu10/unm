@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.unnouveaumonde;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
+import com.unm.rodolphe.unnouveaumonde.R;
+import com.unm.unnouveaumonde.objects.Tarif;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.unm.rodolphe.unnouveaumonde;
+package com.unm.unnouveaumonde;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,9 +18,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unm.rodolphe.unnouveaumonde.objects.Activite;
-import com.unm.rodolphe.unnouveaumonde.objects.Enfant;
-import com.unm.rodolphe.unnouveaumonde.objects.Tarif;
+import com.unm.rodolphe.unnouveaumonde.R;
+import com.unm.unnouveaumonde.objects.Activite;
+import com.unm.unnouveaumonde.objects.Enfant;
+import com.unm.unnouveaumonde.objects.Tarif;
 
 import java.io.IOException;
 import java.net.URL;

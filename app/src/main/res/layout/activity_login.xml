@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.unm.rodolphe.unnouveaumonde.LoginActivity">
+    tools:context="com.unm.unnouveaumonde.LoginActivity">
 
     <TextView
         android:id="@+id/textView"

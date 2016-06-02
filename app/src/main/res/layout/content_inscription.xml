@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.unm.rodolphe.unnouveaumonde.Inscription"
+    tools:context="com.unm.unnouveaumonde.Inscription"
     tools:showIn="@layout/activity_inscription">
 
 
@@ -48,11 +48,11 @@
         android:id="@+id/boutonRetour1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundcorner"
-        android:text="@string/mainmenu"
         android:layout_below="@+id/buttonDescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:background="@drawable/roundcorner"
+        android:text="@string/mainmenu" />
 
     <LinearLayout
         android:id="@+id/layout2"
@@ -109,25 +109,25 @@
         android:id="@+id/buttonValideInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundcorner"
-        android:text="@string/validate"
-        android:theme="@style/AlertDialog.AppCompat"
         android:layout_below="@+id/layout2"
+        android:layout_marginRight="25dp"
         android:layout_toLeftOf="@+id/buttonDescription"
         android:layout_toStartOf="@+id/buttonDescription"
-        android:layout_marginRight="25dp" />
+        android:background="@drawable/roundcorner"
+        android:text="@string/validate"
+        android:theme="@style/AlertDialog.AppCompat" />
 
     <Button
         android:id="@+id/boutonAnnuler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/layout2"
+        android:layout_marginLeft="25dp"
+        android:layout_toEndOf="@+id/buttonDescription"
+        android:layout_toRightOf="@+id/buttonDescription"
         android:background="@drawable/roundcorner"
         android:text="@string/cancel"
-        android:theme="@style/AlertDialog.AppCompat"
-        android:layout_below="@+id/layout2"
-        android:layout_toRightOf="@+id/buttonDescription"
-        android:layout_toEndOf="@+id/buttonDescription"
-        android:layout_marginLeft="25dp" />
+        android:theme="@style/AlertDialog.AppCompat" />
 
 
 </RelativeLayout>
