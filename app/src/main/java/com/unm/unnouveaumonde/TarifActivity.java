@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.objects.Tarif;
 
 import java.util.ArrayList;

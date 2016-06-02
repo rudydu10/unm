@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.gcm.RegistrationIntentService;
 import com.unm.unnouveaumonde.objects.Tarif;
 

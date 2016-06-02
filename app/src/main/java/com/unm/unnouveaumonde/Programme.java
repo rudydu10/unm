@@ -7,8 +7,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.unm.rodolphe.unnouveaumonde.R;
-
 public class Programme extends Activity {
 
     WebView webView;

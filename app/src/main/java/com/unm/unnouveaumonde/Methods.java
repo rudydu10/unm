@@ -8,7 +8,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
-import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.json.JSONToActivite;
 import com.unm.unnouveaumonde.json.JSONToEnfant;
 import com.unm.unnouveaumonde.json.JSONToTarif;

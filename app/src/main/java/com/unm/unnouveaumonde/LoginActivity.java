@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.unm.rodolphe.unnouveaumonde.R;
 
 public class LoginActivity extends Activity {
 

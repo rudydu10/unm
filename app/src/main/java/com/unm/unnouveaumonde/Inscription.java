@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.objects.Activite;
 import com.unm.unnouveaumonde.objects.Enfant;
 import com.unm.unnouveaumonde.objects.Tarif;

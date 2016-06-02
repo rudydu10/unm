@@ -1,6 +1,5 @@
 package com.unm.unnouveaumonde.gcm;
 
-
 import android.os.Bundle;
 import android.util.Log;
 

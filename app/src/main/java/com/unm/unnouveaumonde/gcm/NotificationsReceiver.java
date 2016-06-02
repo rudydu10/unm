@@ -6,8 +6,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.Programme;
+import com.unm.unnouveaumonde.R;
 
 public class NotificationsReceiver extends C2DMBroadcastReceiver {
 

@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.unm.rodolphe.unnouveaumonde.R;
 import com.unm.unnouveaumonde.objects.Activite;
 import com.unm.unnouveaumonde.objects.Enfant;
 import com.unm.unnouveaumonde.objects.Tarif;
