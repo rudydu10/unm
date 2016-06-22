@@ -15,7 +15,7 @@ public class JSONToActivite extends AsyncTask<String, Void, List<Activite>> {
 
     @Override
     protected List<Activite> doInBackground(String... strings) {
-        List<Activite> list = new ArrayList<>();
+        List<Activite> list = new ArrayList<>(100);
         String string = strings[0];
         try {
 

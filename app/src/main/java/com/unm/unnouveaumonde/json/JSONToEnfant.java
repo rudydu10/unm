@@ -15,7 +15,7 @@ public class JSONToEnfant extends AsyncTask<String, Void, List<Enfant>> {
 
     @Override
     protected List<Enfant> doInBackground(String... strings) {
-        List<Enfant> list = new ArrayList<>();
+        List<Enfant> list = new ArrayList<>(10);
 
         String string = strings[0];
 
