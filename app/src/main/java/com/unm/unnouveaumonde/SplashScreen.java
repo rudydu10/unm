@@ -170,7 +170,6 @@ public class SplashScreen extends AppCompatActivity {
             });
 
             thread.start();
-            thread.interrupt();
         }
         else{
             Intent intent = new Intent(SplashScreen.this, Main.class);
