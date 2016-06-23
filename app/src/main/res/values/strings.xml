@@ -112,4 +112,9 @@
     <string name="DemiJournée">&#189; Journée</string>
     <string name="DemiJournéeR">&#189; Journée + Repas</string>
     <string name="Semaine">Semaine</string>
+    <string name="DJ">Demi Journée</string>
+    <string name="DJR">Demi Journée avec Repa</string>
+    <string name="J">Journée</string>
+    <string name="JR">Journée avec Repas</string>
+    <string name="S">Semaine</string>
 </resources>

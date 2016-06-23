@@ -174,6 +174,8 @@ public class Inscription extends AppCompatActivity {
                 datedebut.setVisibility(View.INVISIBLE);
                 datefin.setVisibility(View.INVISIBLE);
                 datefin.setText("");
+                datedebuttext.setVisibility(View.INVISIBLE);
+                datefintext.setVisibility(View.INVISIBLE);
             }
         });
     }
